@@ -38,7 +38,7 @@ async def force_sub(client: Client, message: Message):
 
     await db.add_forcesub(message.chat.id, chat.id)
     await message.reply_text(
-        f"**📌 𝖢𝗁𝖺𝗍 𝖥𝗈𝗋𝖼𝖾𝗌𝗎𝖻 𝖤𝗇𝖺𝖻𝗅𝖾𝖽!** \n\n"
+        f"**📌 Chat Forcesub Enabled!** \n\n"
         f"__Users must join__ {chat.title} (`{chat.id}`) __to chat here!__"
     )
 
