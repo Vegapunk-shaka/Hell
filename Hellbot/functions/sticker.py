@@ -30,9 +30,9 @@ def get_emoji_and_id(message: Message) -> Tuple[int, str]:
     if pack_emoji is None:
         sticker = message.reply_to_message.sticker
         try:
-            pack_emoji = sticker.emoji if sticker and sticker.emoji else "🍀"
+            pack_emoji = sticker.emoji if sticker and sticker.emoji else "🔥"
         except:
-            pack_emoji = "🍀"
+            pack_emoji = "🔥"
 
     return pack_id, pack_emoji
 
