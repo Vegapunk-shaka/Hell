@@ -26,12 +26,12 @@ async def help_inline(_, query: InlineQuery):
         results=[
             (
                 InlineQueryResultArticle(
-                    "HellBot Help Menu 🍀",
+                    "RinBot Help Menu 🍀",
                     InputTextMessageContent(
                         caption,
                         disable_web_page_preview=True,
                     ),
-                    description="Inline Query for Help Menu of HellBot",
+                    description="Inline Query for Help Menu of RinBot",
                     reply_markup=InlineKeyboardMarkup(buttons),
                 )
             )
