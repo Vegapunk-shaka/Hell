@@ -11,7 +11,7 @@ from . import HELP_MSG, START_MSG, Config, Symbols, hellbot
 async def check_auth_click(cb: CallbackQuery) -> bool:
     if cb.from_user.id not in Config.AUTH_USERS:
         await cb.answer(
-            "You are not authorized to use this bot. \n\n</> @Its_HellBot",
+            "You are not authorized to use this bot. \n\n</> @Chowdhury_Siam",
             show_alert=True,
         )
         return False
@@ -49,9 +49,9 @@ async def bot_help_menu_cb(_, cb: CallbackQuery):
     buttons.append([InlineKeyboardButton(Symbols.back, "help_data:bothelp")])
 
     caption = (
-        f"**𝖯𝗅𝗎𝗀𝗂𝗇 𝖥𝗂𝗅𝖾:** `{plugin}`\n"
-        f"**𝖯𝗅𝗎𝗀𝗂𝗇 𝖨𝗇𝖿𝗈:** __{Config.BOT_HELP[plugin]['info']} 🍀__\n\n"
-        f"**📃 𝖫𝗈𝖺𝖽𝖾𝖽 𝖢𝗈𝗆𝗆𝖺𝗇𝖽𝗌:** `{len(sorted(Config.BOT_HELP[plugin]['commands']))}`"
+        f"**Plugin File:** `{plugin}`\n"
+        f"**Plugin Info:** __{Config.BOT_HELP[plugin]['info']} 🍀__\n\n"
+        f"**📃 Loaded Commands:** `{len(sorted(Config.BOT_HELP[plugin]['commands']))}`"
     )
 
     try:
@@ -75,11 +75,11 @@ async def bot_help_cmd_cb(_, cb: CallbackQuery):
     command = str(cb.data.split(":")[2])
     cmd_dict = Config.BOT_HELP[plugin]["commands"][command]
 
-    result += f"**{Symbols.radio_select} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{cmd_dict['command']}`"
+    result += f"**{Symbols.radio_select} Command:** `/{cmd_dict['command']}`"
     result += (
-        f"\n\n**{Symbols.arrow_right} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{cmd_dict['description']}__"
+        f"\n\n**{Symbols.arrow_right} Description:** __{cmd_dict['description']}__"
     )
-    result += f"\n\n**<\> @Its_HellBot 🍀**"
+    result += f"\n\n**<\> @Chowdhury_Siam 🍀**"
 
     buttons = [
         [
@@ -174,22 +174,22 @@ async def help_cmd_cb(_, cb: CallbackQuery):
     cmd_dict = Config.HELP_DICT[plugin]["commands"][command]
 
     if cmd_dict["parameters"] is None:
-        result += f"**{Symbols.radio_select} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `{Config.HANDLERS[0]}{cmd_dict['command']}`"
+        result += f"**{Symbols.radio_select} Command:** `{Config.HANDLERS[0]}{cmd_dict['command']}`"
     else:
-        result += f"**{Symbols.radio_select} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `{Config.HANDLERS[0]}{cmd_dict['command']} {cmd_dict['parameters']}`"
+        result += f"**{Symbols.radio_select} Command:** `{Config.HANDLERS[0]}{cmd_dict['command']} {cmd_dict['parameters']}`"
 
     if cmd_dict["description"]:
         result += (
-            f"\n\n**{Symbols.arrow_right} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{cmd_dict['description']}__"
+            f"\n\n**{Symbols.arrow_right} Description:** __{cmd_dict['description']}__"
         )
 
     if cmd_dict["example"]:
-        result += f"\n\n**{Symbols.arrow_right} 𝖤𝗑𝖺𝗆𝗉𝗅𝖾:** `{Config.HANDLERS[0]}{cmd_dict['example']}`"
+        result += f"\n\n**{Symbols.arrow_right} Example:** `{Config.HANDLERS[0]}{cmd_dict['example']}`"
 
     if cmd_dict["note"]:
-        result += f"\n\n**{Symbols.arrow_right} 𝖭𝗈𝗍𝖾:** __{cmd_dict['note']}__"
+        result += f"\n\n**{Symbols.arrow_right} Note:** __{cmd_dict['note']}__"
 
-    result += f"\n\n**<\> @Its_HellBot 🍀**"
+    result += f"\n\n**<\> @Chowdhury_Siam 🍀**"
 
     buttons = [
         [
@@ -217,7 +217,7 @@ async def help_close_cb(_, cb: CallbackQuery):
     action = str(cb.data.split(":")[1])
     if action == "c":
         await cb.edit_message_text(
-            "**𝖧𝖾𝗅𝗉 𝖬𝖾𝗇𝗎 𝖢𝗅𝗈𝗌𝖾𝖽!**",
+            "**Help Menu Closed!**",
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("Reopen", "help_data:reopen")]]
             ),
@@ -245,15 +245,15 @@ async def help_close_cb(_, cb: CallbackQuery):
     elif action == "source":
         buttons = [
             [
-                InlineKeyboardButton("🚀 Deploy", url="https://github.com/The-HellBot/HellBot"),
-                InlineKeyboardButton("Plugins 📂", url="https://github.com/The-HellBot/Plugins"),
+                InlineKeyboardButton("🚀 Deploy", url="https://t.me/Chowdhury_Siam"),
+                InlineKeyboardButton("Plugins 📂", url="https://t.me/Chowdhury_Siam"),
             ],
             [
-                InlineKeyboardButton("нєℓℓвσт ηєтωσяк 🇮🇳", url="https://t.me/HellBot_Networks"),
+                InlineKeyboardButton("Anime Kun", url="https://t.me/Anime_Kun_Channel"),
             ],
             [
-                InlineKeyboardButton("🎙️ Support", url="https://t.me/HellBot_Chats"),
-                InlineKeyboardButton("Updates 📣", url="https://t.me/Its_HellBot"),
+                InlineKeyboardButton("🎙️ Support", url="https://t.me/Chowdhury_Siam"),
+                InlineKeyboardButton("Updates 📣", url="https://t.me/AnimeKunChannel"),
             ],
             [
                 InlineKeyboardButton("🔙", "help_data:start"),
@@ -262,11 +262,11 @@ async def help_close_cb(_, cb: CallbackQuery):
         ]
         await cb.edit_message_text(
             "__» The source code is available on GitHub. You can find the link below.__\n"
-            "__» Every project available under The-HellBot are open-source and free to use and modify to your needs.__\n"
+            "__» Every project available under The-RinBot are open-source and free to use and modify to your needs.__\n"
             "__» Anyone pretending to be the developer of this bot and selling the code, is a scammer.__\n\n"
             "__» Please consider giving a star to the repository if you liked the project.__\n"
             "__» Feel free to contact us if you need any help regarding the source code.__\n\n"
-            "**❤️ @HellBot_Networks 🇮🇳**",
+            "**❤️ @Chowdhury_Siam**",
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(buttons),
         )
@@ -276,4 +276,5 @@ async def help_close_cb(_, cb: CallbackQuery):
             START_MSG.format(cb.from_user.mention),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(buttons),
-        )
+)
+                           
