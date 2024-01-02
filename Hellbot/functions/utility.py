@@ -28,7 +28,7 @@ class TelegraphAPI:
 class Gcast:
     def __init__(self) -> None:
         self.file_name = "gcast_{0}.txt"
-        self.complete_msg = "**🍀 𝖦𝖼𝖺𝗌𝗍 𝖢𝗈𝗆𝗉𝗅𝖾𝗍𝖾𝖽!** \n\n**𝖬𝖾𝗌𝗌𝖺𝗀𝖾:** [click here]({0})\n**𝖢𝗈𝗎𝗇𝗍:** `{1} {2}`\n**𝖥𝗈𝗋𝗐𝖺𝗋𝖽 𝗍𝖺𝗀:** `{3}`\n**𝖳𝗂𝗆𝖾 𝗍𝖺𝗄𝖾𝗇:** `{4}`"
+        self.complete_msg = "**🍀 Gcast Completed!** \n\n**Message:** [click here]({0})\n**Count:** `{1} {2}`\n**Forward tag:** `{3}`\n**Time taken:** `{4}`"
 
     async def _send_msg(self, chat_id: int, msg: Message, tag: bool):
         await msg.forward(chat_id) if tag else await msg.copy(chat_id)
