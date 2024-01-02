@@ -29,25 +29,25 @@ class HelpMenu:
         return self
 
     def get_menu(self) -> str:
-        result = f"**𝖯𝗅𝗎𝗀𝗂𝗇 𝖥𝗂𝗅𝖾:** `{self.filename}`"
+        result = f"**Plugin File:** `{self.filename}`"
         if self.command_info:
-            result += f"\n**𝖯𝗅𝗎𝗀𝗂𝗇 𝖨𝗇𝖿𝗈:** __{self.command_info} 🍀__"
+            result += f"\n**Plugin Info:** __{self.command_info} 🍀__"
         result += "\n\n"
         for command in self.command_dict:
             command = self.command_dict[command]
-            result += f"**{Symbols.radio_select} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `{Config.HANDLERS[0]}{command['command']}"
+            result += f"**{Symbols.radio_select} Command:** `{Config.HANDLERS[0]}{command['command']}"
             if command["parameters"]:
                 result += f" {command['parameters']}`\n"
             else:
                 result += "`\n"
             if command["description"]:
                 result += (
-                    f"**{Symbols.arrow_right} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command['description']}__\n"
+                    f"**{Symbols.arrow_right} Description:** __{command['description']}__\n"
                 )
             if command["example"]:
-                result += f"**{Symbols.arrow_right} 𝖤𝗑𝖺𝗆𝗉𝗅𝖾:** `{Config.HANDLERS[0]}{command['example']}`\n"
+                result += f"**{Symbols.arrow_right} Example:** `{Config.HANDLERS[0]}{command['example']}`\n"
             if command["note"]:
-                result += f"**{Symbols.arrow_right} 𝖭𝗈𝗍𝖾:** __{command['note']}__\n"
+                result += f"**{Symbols.arrow_right} Note:** __{command['note']}__\n"
 
             result += "\n"
 
@@ -84,16 +84,16 @@ class BotHelp:
         return self
 
     def get_menu(self) -> str:
-        result = f"**𝖯𝗅𝗎𝗀𝗂𝗇 𝖢𝖺𝗍𝖾𝗀𝗈𝗋𝗒:** `{self.category}`"
+        result = f"**Plugin Category:** `{self.category}`"
         if self.command_info:
-            result += f"\n**𝖯𝗅𝗎𝗀𝗂𝗇 𝖨𝗇𝖿𝗈:** __{self.command_info}__"
+            result += f"\n**Plugin Info:** __{self.command_info}__"
         result += "\n\n"
         for command in self.command_dict:
             command = self.command_dict[command]
-            result += f"**{Symbols.radio_select} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{command['command']}`\n"
+            result += f"**{Symbols.radio_select} Command:** `/{command['command']}`\n"
             if command["description"]:
                 result += (
-                    f"**{Symbols.arrow_right} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command['description']}__\n"
+                    f"**{Symbols.arrow_right} Description:** __{command['description']}__\n"
                 )
             result += "\n"
 
@@ -130,3 +130,4 @@ BotHelp("example").add(
     "information of category"
 ).done()
 """
+        
