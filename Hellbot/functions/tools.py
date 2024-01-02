@@ -33,7 +33,7 @@ async def progress(
         )
         msg = (
             progress_str
-            + "__{0}__ **𝗈𝖿** __{1}__\n**𝖲𝗉𝖾𝖾𝖽:** __{2}/s__\n**𝖤𝖳𝖠:** __{3}__".format(
+            + "__{0}__ **of** __{1}__\n**Speed:** __{2}/s__\n**ETA:** __{3}__".format(
                 humanbytes(current),
                 humanbytes(total),
                 humanbytes(speed),
