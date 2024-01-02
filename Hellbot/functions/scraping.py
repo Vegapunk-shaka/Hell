@@ -299,7 +299,7 @@ async def get_anime_info(search_term: str) -> tuple[str, str]:
     if not english_title:
         english_title = data["title"]["romaji"]
     flag = get_country_flag(data["countryOfOrigin"])
-    name = f"**[{flag}] {english_title} ({native_title})**"
+    name = f"**{english_title} | {native_title}**"
 
     anime_id = data["id"]
     score = data["averageScore"] if data["averageScore"] else "N/A"
@@ -426,7 +426,7 @@ async def get_character_info(search_term: str) -> tuple[str, str]:
 
     cameo = data["media"]["nodes"][0] if data["media"]["nodes"] else {}
     if cameo:
-        role_in = f"\n╰➢ **𝖱𝗈𝗅𝖾 𝖨𝗇:** [{cameo['title']['romaji']}]({cameo['siteUrl']})"
+        role_in = f"\n╰➢ **Role In:** [{cameo['title']['romaji']}]({cameo['siteUrl']})"
     else:
         role_in = ""
 
