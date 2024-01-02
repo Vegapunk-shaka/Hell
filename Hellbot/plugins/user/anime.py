@@ -17,7 +17,7 @@ from Hellbot.functions.scraping import (
 from . import HelpMenu, on_message
 
 
-@on_message("anime", allow_stan=True)
+@on_message("ani", allow_stan=True)
 async def anime(_, message: Message):
     if len(message.command) < 2:
         return await hellbot.delete(message, "Give me an anime name to search!")
@@ -36,7 +36,7 @@ async def anime(_, message: Message):
         os.remove(photo)
 
 
-@on_message("manga", allow_stan=True)
+@on_message("man", allow_stan=True)
 async def manga(_, message: Message):
     if len(message.command) < 2:
         return await hellbot.delete(message, "Give me a manga name to search!")
@@ -55,7 +55,7 @@ async def manga(_, message: Message):
         os.remove(photo)
 
 
-@on_message("character", allow_stan=True)
+@on_message("cha", allow_stan=True)
 async def character(_, message: Message):
     if len(message.command) < 2:
         return await hellbot.delete(message, "Give me a character name to search!")
@@ -74,7 +74,7 @@ async def character(_, message: Message):
         os.remove(photo)
 
 
-@on_message("airing", allow_stan=True)
+@on_message("air", allow_stan=True)
 async def airing(_, message: Message):
     if len(message.command) < 2:
         return await hellbot.delete(message, "Give me an anime name to search!")
@@ -93,7 +93,7 @@ async def airing(_, message: Message):
         os.remove(photo)
 
 
-@on_message(["anilistuser", "aniuser"], allow_stan=True)
+@on_message(["anilist", "aniuser"], allow_stan=True)
 async def anilist_user(_, message: Message):
     if len(message.command) < 2:
         return await hellbot.delete(message, "Give me an anilist username to search!")
@@ -142,28 +142,28 @@ async def watch_order(_, message: Message):
     await hell.edit(caption, disable_web_page_preview=True)
 
 
-HelpMenu("anime").add(
-    "anime",
+HelpMenu("ani").add(
+    "ani",
     "<name>",
     "Get a detailed information about the mentioned anime.",
     "anime one piece",
 ).add(
-    "manga",
+    "man",
     "<name>",
     "Get a detailed information about the mentioned manga.",
     "manga one piece",
 ).add(
-    "character",
+    "cha",
     "<name>",
     "Get a detailed information about the mentioned character.",
     "character monkey d luffy",
 ).add(
-    "airing",
+    "air",
     "<name>",
     "Get a detailed airing information about the mentioned anime.",
     "airing one piece",
 ).add(
-    "anilistuser",
+    "anilist",
     "<username>",
     "Get a detailed information about the mentioned anilist user.",
     "anilistuser meizhellboy",
