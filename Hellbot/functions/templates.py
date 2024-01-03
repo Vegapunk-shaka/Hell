@@ -46,22 +46,22 @@ ANIME_TEMPLATES = [
     """
 {name}
 
-╭────────────────•
-╰➢ **Score:** `{score}`
-╰➢ **Source:** `{source}`
-╰➢ **Type:** `{mtype}`
-╰➢ **Episodes:** `{episodes}`
-╰➢ **Duration:** `{duration} minutes`
-╰➢ **Status:** `{status}`
-╰➢ **Format:** `{format}`
-╰➢ **Genre:** `{genre}`
-╰➢ **Tags:** `{tags}`
-╰➢ **Adult Rated:** `{isAdult}`
-╰➢ **Studio:** `{studio}`
-╰➢ **Trailer:** {trailer}
-╰➢ **Website:** {siteurl}
-╰➢ **Synopsis:** [Click Here]({description})
-╰────────────────•
+**- - - - -> 『 ᴀɴɪᴍᴇ ɪɴꜰᴏ 』 <- - - - -**
+
+**••⪼ ℹ️ ꜱᴏᴜʀᴄᴇ :** `{source}`
+**••⪼ 🗯️ ᴛʏᴘᴇ :** `{format}`
+**••⪼ 🌟 ᴀɴɪʟɪꜱᴛ ꜱᴄᴏʀᴇ :** `{score}%` 🌟
+**••⪼ 🕐 ᴅᴜʀᴀᴛɪᴏɴ :** `{duration} min/ep`
+**••⪼ 🔞 ᴀᴅᴜʟᴛ ʀᴀᴛᴇᴅ :** `{isAdult}`
+**••⪼ ⌨️ ꜱʏɴᴏᴘꜱɪꜱ :** [Description]({description})
+**••⪼ 🌐 ᴡᴇʙꜱɪᴛᴇ :** [{english}]({siteurl})
+**••⪼ 💽 ᴛʀᴀɪʟᴇʀ :** {trailer}
+**••⪼ 📷 Qᴜᴀʟɪᴛʏ :** `1080p`
+**••⪼ 🎧 ᴀᴜᴅɪᴏ :** `Japanese & English`
+**••⪼ 📂 ꜱᴜʙᴛɪᴛʟᴇꜱ :** `English`
+**••⪼ 🖨️ ꜱᴛᴀᴛᴜꜱ :** `{status}` | `{episodes}`
+**••⪼ 🎨 ɢᴇɴʀᴇꜱ :** `{genre}`
+**••⪼ 🏷️ ᴛᴀɢꜱ :** `{tags}`
 """
 ]
 
