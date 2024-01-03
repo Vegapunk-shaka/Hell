@@ -63,7 +63,7 @@ class HellClient(Client):
         await self.bot.start()
         me = await self.bot.get_me()
         LOGS.info(
-            f"{Symbols.arrow_right * 2} Started HellBot Client: '{me.username}' {Symbols.arrow_left * 2}"
+            f"{Symbols.arrow_right * 2} Started RinBot Client: '{me.username}' {Symbols.arrow_left * 2}"
         )
 
     async def load_plugin(self) -> None:
@@ -110,7 +110,7 @@ class HellClient(Client):
     async def start_message(self, version: dict) -> None:
         await self.bot.send_animation(
             Config.LOGGER_ID,
-            "https://telegra.ph/file/587e78b1375927d0cd3b8.jpg",
+            "https://te.legra.ph/file/3ecb4a663416118f577c2.mp4",
             f"**{Symbols.check_mark} RinBot is now Online!**\n\n"
             f"**{Symbols.triangle_right} Clients:** `{len(self.users)}`\n"
             f"**{Symbols.triangle_right} Plugins:** `{len(Config.CMD_MENU)}`\n"
