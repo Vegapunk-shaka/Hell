@@ -15,8 +15,8 @@ from . import HelpMenu, hellbot, on_message
 
 def obtain_ids(user: str):
     response = requests.get("https://www.instagram.com/" + user)
-    appid = re.search('appId":"(\d*)', response.text)[1]
-    serverid = re.search('server_revision":(\d*)', response.text)[1]
+    appid = re.search(r'appId":"(\d*)', response.text)[1]
+    serverid = re.search(r'server_revision":(\d*)', response.text)[1]
 
     return appid, serverid
 
@@ -60,7 +60,7 @@ async def instagramReels(_, message: Message):
             await hell.edit("Uploading...")
             await message.reply_video(
                 fileName,
-                caption=f"__💫 Downloaded Instagram Reels!__ \n\n**</> @HellBot_Networks**",
+                caption=f"__💫 Downloaded Instagram Reels!__ \n\n**</> @Chowdhury_Siam**",
             )
             await hell.delete()
             os.remove(fileName)
@@ -119,7 +119,7 @@ async def instagramPost(_, message: Message):
                     file.write(binary)
                 await message.reply_video(
                     fileName,
-                    caption=f"__💫 Downloaded Instagram Post!__ \n\n**</> @HellBot_Networks**",
+                    caption=f"__💫 Downloaded Instagram Post!__ \n\n**</> @Chowdhury_Siam**",
                 )
                 await hell.delete()
                 os.remove(fileName)
@@ -191,15 +191,15 @@ async def instagramUser(_, message: Message):
         await message.reply_photo(
             profile_pic,
             caption=(
-                f"**🍀 𝖥𝗎𝗅𝗅 𝖭𝖺𝗆𝖾:** `{full_name}`\n"
-                f"**👤 𝖴𝗌𝖾𝗋𝗇𝖺𝗆𝖾:** [{username}](https://instagram.com/{username})\n"
-                f"**👁‍🗨 𝖯𝗋𝗂𝗏𝖺𝗍𝖾:** `{is_private}`\n"
-                f"**👑 𝖵𝖾𝗋𝗂𝖿𝗂𝖾𝖽:** `{is_verified}`\n"
-                f"**📸 𝖯𝗈𝗌𝗍𝗌:** `{posts}`\n"
-                f"**💫 𝖥𝗈𝗅𝗅𝗈𝗐𝖾𝗋𝗌:** `{followers}`\n"
-                f"**🍂 𝖥𝗈𝗅𝗅𝗈𝗐𝗂𝗇𝗀:** `{following}`\n"
-                f"**💬 𝖡𝗂𝗈:** `{about}`\n\n"
-                "**</> @HellBot_Networks**"
+                f"**🍀 Full Name:** `{full_name}`\n"
+                f"**👤 Username:** [{username}](https://instagram.com/{username})\n"
+                f"**👁‍🗨 Private:** `{is_private}`\n"
+                f"**👑 Verified:** `{is_verified}`\n"
+                f"**📸 Posts:** `{posts}`\n"
+                f"**💫 Followers:** `{followers}`\n"
+                f"**🍂 Following:** `{following}`\n"
+                f"**💬 Bio:** `{about}`\n\n"
+                "**</> @Chowdhury_Siam**"
             ),
         )
         await hell.delete()
