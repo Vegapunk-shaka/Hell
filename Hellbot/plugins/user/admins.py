@@ -11,13 +11,13 @@ from . import HelpMenu, group_only, handler, hellbot, on_message
 @on_message(
     "promote",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def promote(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
         return await hellbot.delete(
-            message, "𝖭𝖾𝖾𝖽 𝖺 𝗎𝗌𝖾𝗋𝗇𝖺𝗆𝖾/𝗂𝖽 𝗈𝗋 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝖺 𝗎𝗌𝖾𝗋 𝗍𝗈 𝗉𝗋𝗈𝗆𝗈𝗍𝖾 𝗍𝗁𝖾𝗆!"
+            message, "Need a username/id or reply to a user to promote them!"
         )
 
     if message.reply_to_message:
@@ -44,7 +44,7 @@ async def promote(client: Client, message: Message):
     except Exception as e:
         return await hellbot.error(message, e)
 
-    await hellbot.delete(message, f"**💫 𝖯𝗋𝗈𝗆𝗈𝗍𝖾𝖽 {user.mention} 𝗌𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅𝗅𝗒!**")
+    await hellbot.delete(message, f"**💫 Promoted {user.mention} successfully!**")
     await hellbot.check_and_log(
         "promote",
         f"**Promoted User**\n\n**User:** {user.mention}\n**User ID:** `{user.id}`\n**Admin:** `{message.from_user.mention}`\n**Group:** `{message.chat.title}`\n**Group ID:** `{message.chat.id}`",
@@ -54,13 +54,13 @@ async def promote(client: Client, message: Message):
 @on_message(
     "demote",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def demote(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
         return await hellbot.delete(
-            message, "𝖭𝖾𝖾𝖽 𝖺 𝗎𝗌𝖾𝗋𝗇𝖺𝗆𝖾/𝗂𝖽 𝗈𝗋 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝖺 𝗎𝗌𝖾𝗋 𝗍𝗈 𝖽𝖾𝗆𝗈𝗍𝖾 𝗍𝗁𝖾𝗆!"
+            message, "Need a username/id or reply to a user to demote them!"
         )
 
     if message.reply_to_message:
@@ -83,7 +83,7 @@ async def demote(client: Client, message: Message):
     except Exception as e:
         return await hellbot.error(message, e)
 
-    await hellbot.delete(message, f"**🙄 𝖣𝖾𝗆𝗈𝗍𝖾𝖽 {user.mention} 𝗌𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅𝗅𝗒!**")
+    await hellbot.delete(message, f"**🙄 Demoted {user.mention} successfully!**")
     await hellbot.check_and_log(
         "demote",
         f"**Demoted User**\n\n**User:** {user.mention}\n**User ID:** `{user.id}`\n**Admin:** `{message.from_user.mention}`\n**Group:** `{message.chat.title}`\n**Group ID:** `{message.chat.id}`",
@@ -93,8 +93,8 @@ async def demote(client: Client, message: Message):
 @on_message(
     "ban",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def ban(client: Client, message: Message):
     if message.reply_to_message:
@@ -111,7 +111,7 @@ async def ban(client: Client, message: Message):
         reason = (await hellbot.input(message)).split(" ", 1)[1].strip()
     else:
         return await hellbot.delete(
-            message, "𝖭𝖾𝖾𝖽 𝖺 𝗎𝗌𝖾𝗋𝗇𝖺𝗆𝖾/𝗂𝖽 𝗈𝗋 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝖺 𝗎𝗌𝖾𝗋 𝗍𝗈 𝖻𝖺𝗇 𝗍𝗁𝖾𝗆!"
+            message, "Need a username/id or reply to a user to ban them!"
         )
 
     try:
@@ -122,7 +122,7 @@ async def ban(client: Client, message: Message):
     reason = reason if reason else "Not Specified"
     await hellbot.delete(
         message,
-        f"**☠️ 𝖡𝖺𝗇𝗇𝖾𝖽 {user.mention} 𝗌𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅𝗅𝗒!**\n**𝖱𝖾𝖺𝗌𝗈𝗇:** `{reason}`",
+        f"**☠️ Banned {user.mention} successfully!**\n**Reason:** `{reason}`",
         30,
     )
     await hellbot.check_and_log(
@@ -134,13 +134,13 @@ async def ban(client: Client, message: Message):
 @on_message(
     "unban",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def unban(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
         return await hellbot.delete(
-            message, "𝖭𝖾𝖾𝖽 𝖺 𝗎𝗌𝖾𝗋𝗇𝖺𝗆𝖾/𝗂𝖽 𝗈𝗋 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝖺 𝗎𝗌𝖾𝗋 𝗍𝗈 𝗎𝗇𝖻𝖺𝗇 𝗍𝗁𝖾𝗆!"
+            message, "Need a username/id or reply to a user to unban them!"
         )
 
     if message.reply_to_message:
@@ -153,7 +153,7 @@ async def unban(client: Client, message: Message):
     except Exception as e:
         return await hellbot.error(message, e)
 
-    await hellbot.delete(message, f"**🤗 𝖴𝗇𝖻𝖺𝗇𝗇𝖾𝖽 {user.mention} 𝖲𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅𝗅𝗒!**", 30)
+    await hellbot.delete(message, f"**🤗 Unbanned {user.mention} Successfully!**", 30)
     await hellbot.check_and_log(
         "unban",
         f"**Unbanned User**\n\n**User:** {user.mention}\n**User ID:** `{user.id}`\n**Admin:** `{message.from_user.mention}`\n**Group:** `{message.chat.title}`\n**Group ID:** `{message.chat.id}`",
@@ -163,8 +163,8 @@ async def unban(client: Client, message: Message):
 @on_message(
     "kick",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def kick(client: Client, message: Message):
     if message.reply_to_message:
@@ -181,7 +181,7 @@ async def kick(client: Client, message: Message):
         reason = (await hellbot.input(message)).split(" ", 1)[1].strip()
     else:
         return await hellbot.delete(
-            message, "𝖭𝖾𝖾𝖽 𝖺 𝗎𝗌𝖾𝗋𝗇𝖺𝗆𝖾/𝗂𝖽 𝗈𝗋 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝖺 𝗎𝗌𝖾𝗋 𝗍𝗈 𝗄𝗂𝖼𝗄 𝗍𝗁𝖾𝗆!"
+            message, "Need a username/id or reply to a user to kick them!"
         )
 
     try:
@@ -192,7 +192,7 @@ async def kick(client: Client, message: Message):
     reason = reason if reason else "Not Specified"
     await hellbot.delete(
         message,
-        f"**👋 𝖪𝗂𝖼𝗄𝖾𝖽 {user.mention} 𝖲𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅𝗅𝗒!**\n**𝖱𝖾𝖺𝗌𝗈𝗇:** `{reason}`",
+        f"**👋 Kicked {user.mention} Successfully!**\n**Reason:** `{reason}`",
         30,
     )
     await hellbot.check_and_log(
@@ -206,8 +206,8 @@ async def kick(client: Client, message: Message):
 @on_message(
     "mute",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def mute(client: Client, message: Message):
     if message.reply_to_message:
@@ -224,7 +224,7 @@ async def mute(client: Client, message: Message):
         reason = (await hellbot.input(message)).split(" ", 1)[1].strip()
     else:
         return await hellbot.delete(
-            message, "𝖭𝖾𝖾𝖽 𝖺 𝗎𝗌𝖾𝗋𝗇𝖺𝗆𝖾/𝗂𝖽 𝗈𝗋 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝖺 𝗎𝗌𝖾𝗋 𝗍𝗈 𝗆𝗎𝗍𝖾 𝗍𝗁𝖾𝗆!"
+            message, "Need a username/id or reply to a user to mute them!"
         )
 
     try:
@@ -237,7 +237,7 @@ async def mute(client: Client, message: Message):
 
     reason = reason if reason else "Not Specified"
     await hellbot.delete(
-        message, f"**🤐 𝖬𝗎𝗍𝖾𝖽 {user.mention} 𝖲𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅𝗅𝗒!**\n**𝖱𝖾𝖺𝗌𝗈𝗇:** `{reason}`", 30
+        message, f"**🤐 Muted {user.mention} Successfully!**\n**Reason:** `{reason}`", 30
     )
     await hellbot.check_and_log(
         "mute",
@@ -248,13 +248,13 @@ async def mute(client: Client, message: Message):
 @on_message(
     "unmute",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def unmute(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
         return await hellbot.delete(
-            message, "𝖭𝖾𝖾𝖽 𝖺 𝗎𝗌𝖾𝗋𝗇𝖺𝗆𝖾/𝗂𝖽 𝗈𝗋 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝖺 𝗎𝗌𝖾𝗋 𝗍𝗈 𝗎𝗇𝗆𝗎𝗍𝖾 𝗍𝗁𝖾𝗆!"
+            message, "Need a username/id or reply to a user to unmute them!"
         )
 
     if message.reply_to_message:
@@ -270,7 +270,7 @@ async def unmute(client: Client, message: Message):
     except Exception as e:
         return await hellbot.error(message, e)
 
-    await hellbot.delete(message, f"**😁 𝖴𝗇𝗆𝗎𝗍𝖾𝖽 {user.mention} 𝖲𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅𝗅𝗒!**", 30)
+    await hellbot.delete(message, f"**😁 Unmuted {user.mention} Successfully!**", 30)
     await hellbot.check_and_log(
         "unmute",
         f"**Unmuted User**\n\n**User:** {user.mention}\n**User ID:** `{user.id}`\n**Admin:** `{message.from_user.mention}`\n**Group:** `{message.chat.title}`\n**Group ID:** `{message.chat.id}`",
@@ -285,7 +285,7 @@ async def unmute(client: Client, message: Message):
 )
 async def pin(_, message: Message):
     if not message.reply_to_message:
-        return await hellbot.delete(message, "𝖭𝖾𝖾𝖽 𝖺 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝗉𝗂𝗇 𝖺 𝗆𝖾𝗌𝗌𝖺𝗀𝖾!")
+        return await hellbot.delete(message, "Need a reply to pin a message!")
 
     try:
         await message.reply_to_message.pin()
@@ -294,7 +294,7 @@ async def pin(_, message: Message):
 
     await hellbot.delete(
         message,
-        f"**📌 𝖯𝗂𝗇𝗇𝖾𝖽 [𝖬𝖾𝗌𝗌𝖺𝗀𝖾]({message.reply_to_message.link}) 𝗂𝗇 {message.chat.title}!**",
+        f"**📌 Pinned [Message]({message.reply_to_message.link}) in {message.chat.title}!**",
         30,
     )
     await hellbot.check_and_log(
@@ -311,7 +311,7 @@ async def pin(_, message: Message):
 )
 async def unpin(_, message: Message):
     if not message.reply_to_message:
-        return await hellbot.delete(message, "𝖭𝖾𝖾𝖽 𝖺 𝗋𝖾𝗉𝗅𝗒 𝗍𝗈 𝗎𝗇𝗉𝗂𝗇 𝖺 𝗆𝖾𝗌𝗌𝖺𝗀𝖾!")
+        return await hellbot.delete(message, "Need a reply to unpin a message!")
 
     try:
         await message.reply_to_message.unpin()
@@ -320,7 +320,7 @@ async def unpin(_, message: Message):
 
     await hellbot.delete(
         message,
-        f"**📌 𝖴𝗇𝗉𝗂𝗇𝗇𝖾𝖽 [𝖬𝖾𝗌𝗌𝖺𝗀𝖾]({message.reply_to_message.link}) 𝗂𝗇 {message.chat.title}!**",
+        f"**📌 Unpinned [Message]({message.reply_to_message.link}) in {message.chat.title}!**",
         30,
     )
     await hellbot.check_and_log(
@@ -332,11 +332,11 @@ async def unpin(_, message: Message):
 @on_message(
     "zombies",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def zombies(_, message: Message):
-    hell = await hellbot.edit(message, "☠️ 𝖣𝖾𝗍𝖾𝖼𝗍𝗂𝗇𝗀 𝗓𝗈𝗆𝖻𝗂𝖾𝗌...")
+    hell = await hellbot.edit(message, "☠️ Detecting zombies...")
     ded_users = []
     async for members in message.chat.get_members():
         if members.user.is_deleted:
@@ -344,12 +344,12 @@ async def zombies(_, message: Message):
 
     if not ded_users:
         return await hell.edit(
-            "🫡 𝖣𝗈𝗇'𝗍 𝗁𝖺𝗏𝖾 𝖺𝗇𝗒 𝗓𝗈𝗆𝖻𝗂𝖾𝗌 𝗂𝗇 𝗍𝗁𝗂𝗌 𝗀𝗋𝗈𝗎𝗉. **𝖦𝗋𝗈𝗎𝗉𝗌' 𝖼𝗅𝖾𝖺𝗇 𝖠𝖥!**"
+            "🫡 Don't have any zombies in this group. **Groups' clean AF!**"
         )
 
     if len(message.command) > 1 and message.command[1].lower() == "clean":
         await hell.edit(
-            f"☠️ 𝖥𝗈𝗎𝗇𝖽 {len(ded_users)} 𝗓𝗈𝗆𝖻𝗂𝖾𝗌... **🔫 𝖳𝗂𝗆𝖾 𝗍𝗈 𝗉𝗎𝗋𝗀𝖾 𝗍𝗁𝖾𝗆!**"
+            f"☠️ Found {len(ded_users)} zombies... **🔫 Time to purge them!**"
         )
         failed = 0
         success = 0
@@ -361,27 +361,27 @@ async def zombies(_, message: Message):
                 LOGS.error(e)
                 failed += 1
 
-        await hell.edit(f"**𝖯𝗎𝗋𝗀𝖾𝖽 {success} 𝗓𝗈𝗆𝖻𝗂𝖾𝗌!**\n`{failed}` holds immunity!")
+        await hell.edit(f"**Purged {success} zombies!**\n`{failed}` holds immunity!")
     else:
         await hell.edit(
-            f"**☠️ 𝖥𝗈𝗎𝗇𝖽 {len(ded_users)} 𝗓𝗈𝗆𝖻𝗂𝖾𝗌!**\n\n__Use__ `{handler}zombies clean` __to kill them!__"
+            f"**☠️ Found {len(ded_users)} zombies!**\n\n__Use__ `{handler}zombies clean` __to kill them!__"
         )
 
 
 HelpMenu("admin").add(
-    "promote", "<𝗎𝗌𝖾𝗋𝗇𝖺𝗆𝖾/𝗂𝖽/reply> <𝗍𝗂𝗍𝗅𝖾>", "Promote a user to admin.", "promote @ForGo10God hellboy"
+    "promote", "<username/id/reply> <title>", "Promote a user to admin.", "promote @"
 ).add(
-    "demote", "<username/id/reply>", "Demote a user from admin.", "demote @ForGo10God"
+    "demote", "<username/id/reply>", "Demote a user from admin.", "demote @"
 ).add(
-    "ban", "<username/id/reply> <reason>", "Ban a user from the group.", "ban @ForGo10God"
+    "ban", "<username/id/reply> <reason>", "Ban a user from the group.", "ban @"
 ).add(
-    "unban", "<username/id/reply>", "Unban a user from the group.", "unban @ForGo10God"
+    "unban", "<username/id/reply>", "Unban a user from the group.", "unban @"
 ).add(
-    "kick", "<username/id/reply> <reason>", "Kick a user from the group.", "kick @ForGo10God"
+    "kick", "<username/id/reply> <reason>", "Kick a user from the group.", "kick @"
 ).add(
-    "mute", "<username/id/reply> <reason>", "Mute a user in the group", "mute @ForGo10God"
+    "mute", "<username/id/reply> <reason>", "Mute a user in the group", "mute @"
 ).add(
-    "unmute", "<username/id/reply>", "Unmute a user in the group.", "unmute @ForGo10God"
+    "unmute", "<username/id/reply>", "Unmute a user in the group.", "unmute @"
 ).add(
     "pin", "<reply>", "Pin the replied message in the group."
 ).add(
@@ -389,3 +389,4 @@ HelpMenu("admin").add(
 ).add(
     "zombies", "clean", "Finds the total number of deleted users present in that group and ban them."
 ).info("Admin Menu").done()
+    
