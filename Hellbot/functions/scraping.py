@@ -299,7 +299,7 @@ async def get_anime_info(search_term: str) -> tuple[str, str]:
     if not english_title:
         english_title = data["title"]["romaji"]
     flag = get_country_flag(data["countryOfOrigin"])
-    name = f"**{english_title} | {native_title}**"
+    name = f"**{english_title}** | `{native_title}`"
 
     anime_id = data["id"]
     score = data["averageScore"] if data["averageScore"] else "N/A"
@@ -320,7 +320,7 @@ async def get_anime_info(search_term: str) -> tuple[str, str]:
     genre = ", ".join(data["genres"]) if data["genres"] else "N/A"
     tags = ", ".join([i["name"] for i in data["tags"][:5]]) if data["tags"] else "N/A"
     studio = data["studios"]["nodes"][0]["name"] if data["studios"]["nodes"] else "N/A"
-    siteurl = f"[Anilist Website]({data['siteUrl']})" if data["siteUrl"] else "N/A"
+    siteurl = f"[{english}]({data['siteUrl']})" if data["siteUrl"] else "N/A"
     isAdult = data["isAdult"]
 
     trailer = "N/A"
