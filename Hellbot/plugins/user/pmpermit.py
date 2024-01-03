@@ -94,7 +94,7 @@ async def unblock_user(client: Client, message: Message):
         await hellbot.error(message, f"`Couldn't unblock {user.mention}`")
 
 
-@on_message(["allow", "approve"], allow_stan=True)
+@on_message(["a", "approve"], allow_stan=True)
 async def allow_pm(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -124,7 +124,7 @@ async def allow_pm(client: Client, message: Message):
     await hellbot.delete(message, f"**{Symbols.check_mark} Allowed:** {user_mention}")
 
 
-@on_message(["disallow", "disapprove"], allow_stan=True)
+@on_message(["da", "disapprove"], allow_stan=True)
 async def disallow_pm(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -163,7 +163,7 @@ async def allowlist(client: Client, message: Message):
     if not users:
         return await hell.edit("`No users allowed to pm!`")
 
-    text = "**🍀 𝖠𝗉𝗉𝗋𝗈𝗏𝖾𝖽 𝖴𝗌𝖾𝗋'𝗌 𝖫𝗂𝗌𝗍:**\n\n"
+    text = "**🍀 Approved User's List:**\n\n"
     for user in users:
         try:
             name = (await client.get_users(user["user"])).first_name
@@ -197,25 +197,30 @@ async def handle_incoming_pm(client: Client, message: Message):
         WARNS[client.me.id] = {message.from_user.id: max_spam}
         return await client.send_message(
             message.from_user.id,
-            f"**{Symbols.cross_mark} 𝖤𝗇𝗈𝗎𝗀𝗁 𝗈𝖿 𝗒𝗈𝗎𝗋 𝗌𝗉𝖺𝗆𝗆𝗂𝗇𝗀 𝗁𝖾𝗋𝖾! 𝖡𝗅𝗈𝖼𝗄𝗂𝗇𝗀 𝗒𝗈𝗎 𝖿𝗋𝗈𝗆 𝖯𝖬 𝗎𝗇𝗍𝗂𝗅 𝖿𝗎𝗋𝗍𝗁𝖾𝗋 𝗇𝗈𝗍𝗂𝖼𝖾.**",
+            f"**{Symbols.cross_mark} Enough of your spamming here! Blocking you from PM until further notice.**",
         )
 
-    pm_msg = f"🍀 𝐇𝐞𝐥𝐥𝐁𝐨𝐭 𝐏𝐌 𝐒𝐞𝐜𝐮𝐫𝐢𝐭𝐲!\n\n"
+    pm_msg = f"🍀 RinBot PM Security!\n\n"
     custom_pmmsg = await db.get_env(ENV.custom_pmpermit)
 
     if custom_pmmsg:
-        pm_msg += f"{custom_pmmsg}\n**𝖸𝗈𝗎 𝗁𝖺𝗏𝖾 {warns} 𝗐𝖺𝗋𝗇𝗂𝗇𝗀𝗌 𝗅𝖾𝖿𝗍!**"
+        pm_msg += f"{custom_pmmsg}\n**You have {warns} warnings left!**"
     else:
-        pm_msg += f"**👋 𝖧𝖾𝗅𝗅𝗈 {message.from_user.mention}!**\n𝖳𝗁𝗂𝗌 𝗂𝗌 𝖺𝗇 𝖺𝗎𝗍𝗈𝗆𝖺𝗍𝖾𝖽 𝗆𝖾𝗌𝗌𝖺𝗀𝖾 𝖺𝗇𝖽 𝗒𝗈𝗎 𝖺𝗋𝖾 𝗋𝖾𝗊𝗎𝖾𝗌𝗍𝖾𝖽 𝗇𝗈𝗍 𝗍𝗈 𝗌𝗉𝖺𝗆 𝗆𝖾𝗌𝗌𝖺𝗀𝖾𝗌 𝗁𝖾𝗋𝖾! \n**𝖸𝗈𝗎 𝗁𝖺𝗏𝖾 {warns} 𝗐𝖺𝗋𝗇𝗂𝗇𝗀𝗌 𝗅𝖾𝖿𝗍!**"
+        pm_msg += f"**👋 Hello {message.from_user.mention}!**\nThis is an automated message and you are requested not to spam messages here! \n**You have {warns} warnings left!**"
 
     try:
         pm_pic = await db.get_env(ENV.pmpermit_pic)
-        if pm_pic:
-            msg = await client.send_document(
+        if pm_pic and pm_pic.endswith(".mp4"):
+            msg = await client.send_video(
                 message.from_user.id,
                 pm_pic,
                 pm_msg,
-                force_document=False,
+            )
+        elif pm_pic:
+            msg = await client.send_photo(
+                message.from_user.id,
+                pm_pic,
+                pm_msg,
             )
         else:
             msg = await client.send_message(
@@ -249,13 +254,13 @@ HelpMenu("pmpermit").add(
     "Unblock a user from pm-ing you.",
     "unblock @ForGo10God",
 ).add(
-    "allow",
+    "a",
     "<reply to user>/<userid/username>",
     "Allow a user to pm you.",
     "allow @ForGo10God",
     "An alias of 'approve' is also available.",
 ).add(
-    "disallow",
+    "da",
     "<reply to user>/<userid/username>",
     "Disallow a user to pm you.",
     "disallow @ForGo10God",
