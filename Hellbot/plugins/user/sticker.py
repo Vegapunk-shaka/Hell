@@ -20,7 +20,7 @@ from Hellbot.functions.sticker import (
 from . import Config, HelpMenu, Symbols, db, hellbot, on_message
 
 
-@on_message("kang", allow_stan=True)
+@on_message("kang", allow_stan=False)
 async def kangSticker(client: Client, message: Message):
     if not message.reply_to_message:
         return await hellbot.delete(message, "Reply to a sticker to kang it.")
@@ -35,13 +35,13 @@ async def kangSticker(client: Client, message: Message):
     if pack_type is None:
         return await hellbot.delete(hell, "Unsupported media type.")
 
-    nickname = f"@{client.me.username}" if client.me.username else client.me.first_name
+    nickname = f"@Chowdhury_Siam" if client.me.username else client.me.first_name
     pack_name = (
         await db.get_env(ENV.sticker_packname)
-        or f"{nickname}'s Vol.{pack_id} ({pack_type.title()})"
+        or f"@Chowdhury_Siam's Pack ({pack_type.title()})"
     )
     pack_url_suffix = (
-        f"HB{client.me.id}_vol{pack_id}_{pack_type}_by_{hellbot.bot.me.username}"
+        f"Chowdhury_Siam_s_Pack_{pack_type}_by_{hellbot.bot.me.username}"
     )
 
     if message.reply_to_message.sticker:
@@ -68,7 +68,7 @@ async def kangSticker(client: Client, message: Message):
             if not status:
                 return await hellbot.error(hell, path)
 
-    sticker = await create_sticker(hellbot.bot, message.chat.id, path, pack_emoji)
+    sticker = await create_sticker(hellbot.bot, Config.LOGGER_ID, path, pack_emoji)
     os.remove(path)
 
     try:
@@ -79,9 +79,9 @@ async def kangSticker(client: Client, message: Message):
                     pack_id += 1
                     pack_name = (
                         await db.get_env(ENV.sticker_packname)
-                        or f"{nickname}'s Vol.{pack_id} ({pack_type.title()})"
+                        or f"@Chowdhury_Siam's Pack ({pack_type.title()})"
                     )
-                    pack_url_suffix = f"HB{client.me.id}_vol{pack_id}_{pack_type}_by_{hellbot.bot.me.username}"
+                    pack_url_suffix = f"Chowdhury_Siam_s_Pack_{pack_type}_by_{hellbot.bot.me.username}"
                     continue
                 else:
                     await add_sticker(hellbot.bot, stickerset, sticker)
@@ -97,7 +97,7 @@ async def kangSticker(client: Client, message: Message):
                 )
             break
         return await hell.edit(
-            f"**{pack_emoji} 𝖲𝗍𝗂𝖼𝗄𝖾𝗋 𝗄𝖺𝗇𝗀𝖾𝖽 𝗍𝗈 [this pack](t.me/addstickers/{pack_url_suffix})**",
+            f"**{pack_emoji} Sticker kanged to [this pack](t.me/addstickers/{pack_url_suffix})**",
             disable_web_page_preview=True,
         )
     except (PeerIdInvalid, UserIsBlocked):
@@ -108,7 +108,7 @@ async def kangSticker(client: Client, message: Message):
         return await hellbot.error(hell, str(e))
 
 
-@on_message("packkang", allow_stan=True)
+@on_message("packkang", allow_stan=False)
 async def packKang(client: Client, message: Message):
     if not message.reply_to_message:
         return await hellbot.delete(message, "Reply to a sticker to kang whole pack!")
@@ -116,9 +116,9 @@ async def packKang(client: Client, message: Message):
     hell = await hellbot.edit(message, "__Kanging sticker pack...__")
 
     pack_id = 1
-    nickname = f"@{client.me.username}" if client.me.username else client.me.first_name
-    packname = await hellbot.input(message) or f"{nickname}'s Pack (Vol.{pack_id})"
-    pack_url_suffix = f"HB{client.me.id}_pkvol{pack_id}_by_{hellbot.bot.me.username}"
+    nickname = f"@Chowdhury_Siam" if client.me.username else client.me.first_name
+    packname = await hellbot.input(message) or f"@Chowdhury_Siam's Pack"
+    pack_url_suffix = f"Chowdhury_Siam_s_Pack_by_{hellbot.bot.me.username}"
 
     if not message.reply_to_message.sticker:
         return await hellbot.delete(hell, "Reply to a sticker to kang whole pack!")
@@ -145,10 +145,10 @@ async def packKang(client: Client, message: Message):
             if stickerset:
                 pack_id += 1
                 pack_url_suffix = (
-                    f"HB{client.me.id}_pkvol{pack_id}_by_{hellbot.bot.me.username}"
+                    f"Chowdhury_Siam_s_Pack_by_{hellbot.bot.me.username}"
                 )
                 packname = (
-                    await hellbot.input(message) or f"{nickname}'s Pack (Vol.{pack_id})"
+                    await hellbot.input(message) or f"@Chowdhury_Siam's Pack"
                 )
                 continue
             else:
@@ -163,7 +163,7 @@ async def packKang(client: Client, message: Message):
                 )
                 break
         return await hell.edit(
-            f"**🍀 𝖲𝗍𝗂𝖼𝗄𝖾𝗋 𝖯𝖺𝖼𝗄 𝗄𝖺𝗇𝗀𝖾𝖽 𝗍𝗈 [this pack](t.me/addstickers/{pack_url_suffix})**",
+            f"**🍀 Sticker Pack kanged to [this pack](t.me/addstickers/{pack_url_suffix})**",
             disable_web_page_preview=True,
         )
     except (PeerIdInvalid, UserIsBlocked):
@@ -193,20 +193,20 @@ async def stickerInfo(_, message: Message):
             pack_emoji.append(emojis.emoticon)
 
     outStr = (
-        f"**🍀 𝖲𝗍𝗂𝖼𝗄𝖾𝗋 𝖯𝖺𝖼𝗄 𝖨𝗇𝖿𝗈:**\n\n"
-        f"**{Symbols.diamond_2} 𝖲𝗍𝗂𝖼𝗄𝖾𝗋 𝖨𝖣:** `{sticker.file_id}`\n"
+        f"**🍀 Sticker Pack Info:**\n\n"
+        f"**{Symbols.diamond_2} Sticker ID:** `{sticker.file_id}`\n"
         f"**{Symbols.diamond_2} Pack Name:** `{sticker_set.set.title}`\n"
         f"**{Symbols.diamond_2} Pack Short Name:** `{sticker_set.set.short_name}`\n"
-        f"**{Symbols.diamond_2} 𝖮𝖿𝖿𝗂𝖼𝗂𝖺𝗅:** {sticker_set.set.official}\n"
-        f"**{Symbols.diamond_2} 𝖤𝗆𝗈𝗃𝗂:** `{', '.join(pack_emoji)}`\n"
-        f"**{Symbols.diamond_2} 𝖣𝖺𝗍𝖾:** `{sticker_set.set.installed_date}`\n"
-        f"**{Symbols.diamond_2} 𝖲𝗍𝗂𝖼𝗄𝖾𝗋 𝖲𝗂𝗓𝖾:** `{sticker_set.set.count}`\n"
+        f"**{Symbols.diamond_2} Official:** {sticker_set.set.official}\n"
+        f"**{Symbols.diamond_2} Emoji:** `{', '.join(pack_emoji)}`\n"
+        f"**{Symbols.diamond_2} Date:** `{sticker_set.set.installed_date}`\n"
+        f"**{Symbols.diamond_2} Sticker Size:** `{sticker_set.set.count}`\n"
     )
 
     await hell.edit(outStr, disable_web_page_preview=True)
 
 
-@on_message("rmsticker", allow_stan=True)
+@on_message("rmsticker", allow_stan=False)
 async def removeSticker(_, message: Message):
     if not message.reply_to_message or not message.reply_to_message.sticker:
         return await hellbot.delete(
@@ -223,7 +223,7 @@ async def removeSticker(_, message: Message):
     try:
         await remove_sticker(hellbot.bot, sticker.file_id)
         await hellbot.delete(
-            hell, f"**𝖣𝖾𝗅𝖾𝗍𝖾𝖽 𝗍𝗁𝖾 𝗌𝗍𝗂𝖼𝗄𝖾𝗋 𝖿𝗋𝗈𝗆 𝗉𝖺𝖼𝗄:** {sticker_set.set.title}",
+            hell, f"**Deleted the sticker from pack:** {sticker_set.set.title}",
         )
     except Exception as e:
         await hellbot.error(hell, str(e))
