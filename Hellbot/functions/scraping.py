@@ -320,12 +320,12 @@ async def get_anime_info(search_term: str) -> tuple[str, str]:
     genre = ", ".join(data["genres"]) if data["genres"] else "N/A"
     tags = ", ".join([i["name"] for i in data["tags"][:5]]) if data["tags"] else "N/A"
     studio = data["studios"]["nodes"][0]["name"] if data["studios"]["nodes"] else "N/A"
-    siteurl = f"[Anilist Website]({data['siteUrl']})" if data["siteUrl"] else "N/A"
+    siteurl = f"[{english_title}]({data['siteUrl']})" if data["siteUrl"] else "N/A"
     isAdult = data["isAdult"]
 
     trailer = "N/A"
     if data["trailer"] and data["trailer"]["site"] == "youtube":
-        trailer = f"[Youtube](https://youtu.be/{data['trailer']['id']})"
+        trailer = f"[YouTube](https://youtu.be/{data['trailer']['id']})"
 
     response = httpx.get(f"https://img.anili.st/media/{anime_id}").content
     banner = f"anime_{anime_id}.jpg"
