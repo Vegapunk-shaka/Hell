@@ -12,25 +12,22 @@ from Hellbot.functions.formatter import add_to_dict, get_from_dict, readable_tim
 from . import HelpMenu, custom_handler, on_message, group_only
 
 afk_quotes = [
-    "⏳ AFK - Away From the Keyboard momentarily.",
-    "🔜 Stepped away, but I'll return shortly.",
-    "👋 Gone for a moment, not forgotten.",
-    "🌿 Taking a breather, back in a bit.",
-    "📵 Away for a while, feel free to leave a message!",
-    "⏰ On a short break, back shortly.",
-    "🌈 Away from the screen, catching a breath.",
-    "💤 Offline for a moment, but still here in spirit.",
-    "🚀 Exploring the real world, back in a moment!",
-    "🚶‍♀️ Stepping away for a moment of peace.",
-    "🚪 Temporarily closed, be back in a bit!",
-    "🌸 Taking a moment to smell the digital roses.",
+    "🚶‍♂️ Taking a break, be back soon!",
+    "⏳ Taking a break, be back soon!",
+    "🔜 Taking a break, be back soon!",
+    "👋 Taking a break, be back soon!",
+    "🌿 Taking a break, be back soon!",
+    "📵 Taking a break, be back soon!",
+    "⏰ Taking a break, be back soon!",
+    "🌈 Taking a break, be back soon!",
+    "💤 Taking a break, be back soon!",
 ]
 
 
 @on_message("afk")
 async def afk(_, message: Message):
     if await db.is_afk(message.from_user.id):
-        return await hellbot.delete(message, "I'm already AFK!")
+        return await hellbot.delete(message, "🙄 I'm already AFK!")
 
     media_type = None
     media = None
