@@ -33,7 +33,7 @@ async def youtube_audio(_, message: Message):
             yt_file = ytdl.prepare_filename(yt_data)
             ytdl.process_info(yt_data)
 
-        upload_text = f"**⬆️ 𝖴𝗉𝗅𝗈𝖺𝖽𝗂𝗇𝗀 𝖲𝗈𝗇𝗀 ...** \n\n**{Symbols.anchor} 𝖳𝗂𝗍𝗅𝖾:** `{yt_data['title'][:50]}`\n**{Symbols.anchor} 𝖢𝗁𝖺𝗇𝗇𝖾𝗅:** `{yt_data['channel']}`"
+        upload_text = f"**⬆️ Uploading Song ...** \n\n**{Symbols.anchor} Title:** `{yt_data['title'][:50]}`\n**{Symbols.anchor} Channel:** `{yt_data['channel']}`"
         await hell.edit(upload_text)
         response = requests.get(f"https://i.ytimg.com/vi/{yt_data['id']}/hqdefault.jpg")
         with open(f"{yt_file}.jpg", "wb") as f:
@@ -41,9 +41,9 @@ async def youtube_audio(_, message: Message):
 
         await message.reply_audio(
             f"{yt_file}.mp3",
-            caption=f"**🎧 𝖳𝗂𝗍𝗅𝖾:** {yt_data['title']} \n\n**👀 𝖵𝗂𝖾𝗐𝗌:** `{yt_data['view_count']}` \n**⌛ 𝖣𝗎𝗋𝖺𝗍𝗂𝗈𝗇:** `{secs_to_mins(int(yt_data['duration']))}`",
+            caption=f"**🎧 Title:** {yt_data['title']} \n\n**👀 Views:** `{yt_data['view_count']}` \n**⌛ Duration:** `{secs_to_mins(int(yt_data['duration']))}`",
             duration=int(yt_data["duration"]),
-            performer="[тнє нєℓℓвσт]",
+            performer="[тнє нєllвσт]",
             title=yt_data["title"],
             thumb=f"{yt_file}.jpg",
             progress=progress,
@@ -84,7 +84,7 @@ async def ytvideo(_, message: Message):
             yt_data = ytdl.extract_info(url, True)
             yt_file = yt_data["id"]
 
-        upload_text = f"**⬆️ 𝖴𝗉𝗅𝗈𝖺𝖽𝗂𝗇𝗀 𝖲𝗈𝗇𝗀 ...** \n\n**{Symbols.anchor} 𝖳𝗂𝗍𝗅𝖾:** `{yt_data['title'][:50]}`\n**{Symbols.anchor} 𝖢𝗁𝖺𝗇𝗇𝖾𝗅:** `{yt_data['channel']}`"
+        upload_text = f"**⬆️ Uploading Song ...** \n\n**{Symbols.anchor} Title:** `{yt_data['title'][:50]}`\n**{Symbols.anchor} Channel:** `{yt_data['channel']}`"
         await hell.edit(upload_text)
         response = requests.get(f"https://i.ytimg.com/vi/{yt_data['id']}/hqdefault.jpg")
         with open(f"{yt_file}.jpg", "wb") as f:
@@ -92,7 +92,7 @@ async def ytvideo(_, message: Message):
 
         await message.reply_video(
             f"{yt_file}.mp4",
-            caption=f"**🎧 𝖳𝗂𝗍𝗅𝖾:** {yt_data['title']} \n\n**👀 𝖵𝗂𝖾𝗐𝗌:** `{yt_data['view_count']}` \n**⌛ 𝖣𝗎𝗋𝖺𝗍𝗂𝗈𝗇:** `{secs_to_mins(int(yt_data['duration']))}`",
+            caption=f"**🎧 Title:** {yt_data['title']} \n\n**👀 Views:** `{yt_data['view_count']}` \n**⌛ Duration:** `{secs_to_mins(int(yt_data['duration']))}`",
             duration=int(yt_data["duration"]),
             thumb=f"{yt_file}.jpg",
             progress=progress,
@@ -129,9 +129,9 @@ async def ytlink(_, message: Message):
     if not results:
         return await hellbot.delete(hell, "No results found.")
 
-    text = f"**🔎 𝖳𝗈𝗍𝖺𝗅 𝖱𝖾𝗌𝗎𝗅𝗍𝗌 𝖥𝗈𝗎𝗇𝖽:** `{len(results)}`\n\n"
+    text = f"**🔎 Total Results Found:** `{len(results)}`\n\n"
     for result in results:
-        text += f"    **{Symbols.anchor} 𝖳𝗂𝗍𝗅𝖾:** `{result['title'][:50]}`\n**{Symbols.anchor} 𝖢𝗁𝖺𝗇𝗇𝖾𝗅:** `{result['channel']}`\n**{Symbols.anchor} 𝖵𝗂𝖾𝗐𝗌:** `{result['views']}`\n**{Symbols.anchor} 𝖣𝗎𝗋𝖺𝗍𝗂𝗈𝗇:** `{result['duration']}`\n**{Symbols.anchor} 𝖫𝗂𝗇𝗄:** `https://youtube.com{result['url_suffix']}`\n\n"
+        text += f"    **{Symbols.anchor} Title:** `{result['title'][:50]}`\n**{Symbols.anchor} Channel:** `{result['channel']}`\n**{Symbols.anchor} Views:** `{result['views']}`\n**{Symbols.anchor} Duration:** `{result['duration']}`\n**{Symbols.anchor} Link:** `https://youtube.com{result['url_suffix']}`\n\n"
 
     await hell.edit(text, disable_web_page_preview=True)
 
