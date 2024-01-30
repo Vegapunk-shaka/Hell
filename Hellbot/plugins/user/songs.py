@@ -22,10 +22,10 @@ async def dwlSong(_, message: Message):
         return await hellbot.delete(message, "Provide a song name to download.")
 
     query = await hellbot.input(message)
-    hell = await hellbot.edit(message, f"🔎 __𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽𝗂𝗇𝗀 𝖲𝗈𝗇𝗀__ `{query}`...")
+    hell = await hellbot.edit(message, f"🔎 __Downloading Song__ `{query}`...")
 
     ytSearch = YoutubeDriver(query, 1).to_dict()[0]
-    upload_text = f"**⬆️ 𝖴𝗉𝗅𝗈𝖺𝖽𝗂𝗇𝗀 𝖲𝗈𝗇𝗀 ...** \n\n**{Symbols.anchor} 𝖳𝗂𝗍𝗅𝖾:** `{ytSearch['title'][:50]}`\n**{Symbols.anchor} 𝖢𝗁𝖺𝗇𝗇𝖾𝗅:** `{ytSearch['channel']}`"
+    upload_text = f"**⬆️ Uploading Song ...** \n\n**{Symbols.anchor} Title:** `{ytSearch['title'][:50]}`\n**{Symbols.anchor} Channel:** `{ytSearch['channel']}`"
 
     try:
         url = f"https://www.youtube.com{ytSearch['url_suffix']}"
@@ -42,9 +42,9 @@ async def dwlSong(_, message: Message):
         start_time = time.time()
         await message.reply_audio(
             f"{yt_file}.mp3",
-            caption=f"**🎧 𝖳𝗂𝗍𝗅𝖾:** {ytSearch['title']} \n\n**👀 𝖵𝗂𝖾𝗐𝗌:** `{ytSearch['views']}` \n**⌛ 𝖣𝗎𝗋𝖺𝗍𝗂𝗈𝗇:** `{ytSearch['duration']}`",
+            caption=f"**🎧 Title:** {ytSearch['title']} \n\n**👀 Views:** `{ytSearch['views']}` \n**⌛ Duration:** `{ytSearch['duration']}`",
             duration=int(yt_data["duration"]),
-            performer="[тнє нєℓℓвσт]",
+            performer="[Siam Chowdhury]",
             title=ytSearch["title"],
             thumb=f"{yt_file}.jpg",
             progress=progress,
@@ -56,7 +56,7 @@ async def dwlSong(_, message: Message):
         )
         await hell.delete()
     except Exception as e:
-        return await hellbot.delete(hell, f"**🍀 𝖲𝗈𝗇𝗀 𝖭𝗈𝗍 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽𝖾𝖽:** `{e}`")
+        return await hellbot.delete(hell, f"**🍀 Song Not Downloaded:** `{e}`")
 
     try:
         os.remove(f"{yt_file}.mp3")
@@ -71,10 +71,10 @@ async def dwlSong(_, message: Message):
         return await hellbot.delete(message, "Provide a song name to download.")
 
     query = await hellbot.input(message)
-    hell = await hellbot.edit(message, f"🔎 __𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽𝗂𝗇𝗀 𝖵𝗂𝖽𝖾𝗈 𝖲𝗈𝗇𝗀__ `{query}`...")
+    hell = await hellbot.edit(message, f"🔎 __Downloading Video Song__ `{query}`...")
 
     ytSearch = YoutubeDriver(query, 1).to_dict()[0]
-    upload_text = f"**⬆️ 𝖴𝗉𝗅𝗈𝖺𝖽𝗂𝗇𝗀 𝖵𝗂𝖽𝖾𝗈 𝖲𝗈𝗇𝗀 ...** \n\n**{Symbols.anchor} 𝖳𝗂𝗍𝗅𝖾:** `{ytSearch['title'][:50]}`\n**{Symbols.anchor} 𝖢𝗁𝖺𝗇𝗇𝖾𝗅:** `{ytSearch['channel']}`"
+    upload_text = f"**⬆️ Uploading Video Song ...** \n\n**{Symbols.anchor} Title:** `{ytSearch['title'][:50]}`\n**{Symbols.anchor} Channel:** `{ytSearch['channel']}`"
 
     try:
         url = f"https://www.youtube.com{ytSearch['url_suffix']}"
@@ -90,7 +90,7 @@ async def dwlSong(_, message: Message):
         start_time = time.time()
         await message.reply_video(
             f"{yt_file}.mp4",
-            caption=f"**🎧 𝖳𝗂𝗍𝗅𝖾:** {ytSearch['title']} \n\n**👀 𝖵𝗂𝖾𝗐𝗌:** `{ytSearch['views']}` \n**⌛ 𝖣𝗎𝗋𝖺𝗍𝗂𝗈𝗇:** `{ytSearch['duration']}`",
+            caption=f"**🎧 Title:** {ytSearch['title']} \n\n**👀 Views:** `{ytSearch['views']}` \n**⌛ Duration:** `{ytSearch['duration']}`",
             duration=int(yt_data["duration"]),
             thumb=f"{yt_file}.jpg",
             progress=progress,
@@ -102,7 +102,7 @@ async def dwlSong(_, message: Message):
         )
         await hell.delete()
     except Exception as e:
-        return await hellbot.delete(hell, f"**🍀 𝖵𝗂𝖽𝖾𝗈 𝖲𝗈𝗇𝗀 𝖭𝗈𝗍 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽𝖾𝖽:** `{e}`")
+        return await hellbot.delete(hell, f"**🍀 Video Song Not Downloaded:** `{e}`")
 
     try:
         os.remove(f"{yt_file}.mp4")
@@ -126,7 +126,7 @@ async def getlyrics(_, message: Message):
     else:
         artist, song = "", query
 
-    hell = await hellbot.edit(message, f"🔎 __𝖫𝗒𝗋𝗂𝖼𝗌 𝖲𝗈𝗇𝗀__ `{query}`...")
+    hell = await hellbot.edit(message, f"🔎 __Lyrics Song__ `{query}`...")
 
     genius = Genius(
         api,
