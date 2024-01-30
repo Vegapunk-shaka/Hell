@@ -14,7 +14,7 @@ def _chunk(from_msg: int, to_msg: int):
         curr_msg += 100
 
 
-@on_message("purge", allow_stan=True)
+@on_message("po", allow_stan=False)
 async def purgeMsg(client: Client, message: Message):
     if not message.reply_to_message:
         return await hellbot.delete(
@@ -35,7 +35,7 @@ async def purgeMsg(client: Client, message: Message):
     await hellbot.delete(hell, f"__🧹 Purged {deleted} messages.__")
 
 
-@on_message("purgeme", allow_stan=True)
+@on_message("pome", allow_stan=False)
 async def purgeMe(client: Client, message: Message):
     if len(message.command) < 2:
         return await hellbot.delete(
@@ -58,7 +58,7 @@ async def purgeMe(client: Client, message: Message):
     await hellbot.delete(hell, f"__🧹 Purged {count} messages.__")
 
 
-@on_message("purgeuser", allow_stan=True)
+@on_message("pouser", allow_stan=False)
 async def purgeUser(client: Client, message: Message):
     if not message.reply_to_message or not message.reply_to_message.from_user:
         return await hellbot.delete(
@@ -87,7 +87,7 @@ async def purgeUser(client: Client, message: Message):
     )
 
 
-@on_message("del", allow_stan=True)
+@on_message("del", allow_stan=False)
 async def delMsg(_, message: Message):
     if not message.reply_to_message:
         return await hellbot.delete(
@@ -98,7 +98,7 @@ async def delMsg(_, message: Message):
     await message.delete()
 
 
-@on_message(["selfdestruct", "sd"], allow_stan=True)
+@on_message(["selfdestruct", "sd"], allow_stan=False)
 async def selfdestruct(client: Client, message: Message):
     if len(message.command) < 3:
         return await hellbot.delete(
@@ -118,17 +118,17 @@ async def selfdestruct(client: Client, message: Message):
 
 
 HelpMenu("purge").add(
-    "purge",
+    "po",
     "<reply to message>",
     "Deletes all messages after the replied message.",
     "purge",
 ).add(
-    "purgeme",
+    "pome",
     "<count>",
     "Deletes last x number of your messages.",
     "purgeme 69",
 ).add(
-    "purgeuser",
+    "pouser",
     "<reply to user> <count>",
     "Deletes last x number of messages of replied user.",
     "purgeuser @ForGo10God 69",
