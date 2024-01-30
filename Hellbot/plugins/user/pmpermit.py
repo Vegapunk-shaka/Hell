@@ -35,7 +35,7 @@ WARNS = {}
 PREV_MESSAGE = {}
 
 
-@on_message("block", allow_stan=True)
+@on_message("b", allow_stan=True)
 async def block_user(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -67,7 +67,7 @@ async def block_user(client: Client, message: Message):
         await hellbot.error(message, f"`Couldn't block {user.mention}`")
 
 
-@on_message("unblock", allow_stan=True)
+@on_message("unb", allow_stan=True)
 async def unblock_user(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -156,7 +156,7 @@ async def disallow_pm(client: Client, message: Message):
     )
 
 
-@on_message(["allowlist", "approvelist"], allow_stan=True)
+@on_message(["al", "approvelist"], allow_stan=True)
 async def allowlist(client: Client, message: Message):
     hell = await hellbot.edit(message, "`Fetching allowlist...`")
     users = await db.get_all_pmpermits(client.me.id)
@@ -174,12 +174,34 @@ async def allowlist(client: Client, message: Message):
     await hell.edit(text)
 
 
+@on_message("pm", allow_stan=True)
+async def set_pmpermit(_, message: Message):
+    if len(message.command) < 2:
+        status = await db.get_env(ENV.pmpermit)
+        text = "Enabled" if status else "Disabled"
+        return await hellbot.delete(message, f"**Current PM Permit Setting:** `{text}`\n\nTo change the setting give either `on` or `off` as argument.")
+
+    cmd = message.command[1].lower().strip()
+
+    if cmd == "on":
+        await db.set_env(ENV.pmpermit, True)
+        await hellbot.delete(message, "**PM Permit Enabled!**")
+    elif cmd == "off":
+        await db.set_env(ENV.pmpermit, False)
+        await hellbot.delete(message, "**PM Permit Disabled!**")
+    else:
+        await hellbot.delete(message, "**Invalid Argument!**")
+
+
 @custom_handler(filters.incoming & filters.private & ~filters.bot & ~filters.service)
 async def handle_incoming_pm(client: Client, message: Message):
     if message.from_user.id in Config.DEVS:
         return
 
     if message.from_user.id == 777000:
+        return
+
+    if not await db.get_env(ENV.pmpermit):
         return
 
     if await db.is_pmpermit(client.me.id, message.from_user.id):
@@ -200,7 +222,7 @@ async def handle_incoming_pm(client: Client, message: Message):
             f"**{Symbols.cross_mark} Enough of your spamming here! Blocking you from PM until further notice.**",
         )
 
-    pm_msg = f"🍀 RinBot PM Security!\n\n"
+    pm_msg = f"🔥 RinBot PM Security!\n\n"
     custom_pmmsg = await db.get_env(ENV.custom_pmpermit)
 
     if custom_pmmsg:
@@ -244,29 +266,29 @@ async def handle_incoming_pm(client: Client, message: Message):
 
 
 HelpMenu("pmpermit").add(
-    "block",
+    "b",
     "<reply to user>/<userid/username>",
     "Block a user from pm-ing you.",
-    "block @ForGo10God",
+    "block @Chowdhury_Siam",
 ).add(
-    "unblock",
+    "unb",
     "<reply to user>/<userid/username>",
     "Unblock a user from pm-ing you.",
-    "unblock @ForGo10God",
+    "unblock @Chowdhury_Siam",
 ).add(
     "a",
     "<reply to user>/<userid/username>",
     "Allow a user to pm you.",
-    "allow @ForGo10God",
+    "allow @Chowdhury_Siam",
     "An alias of 'approve' is also available.",
 ).add(
     "da",
     "<reply to user>/<userid/username>",
     "Disallow a user to pm you.",
-    "disallow @ForGo10God",
+    "disallow @Chowdhury_Siam",
     "An alias of 'disapprove' is also available.",
 ).add(
-    "allowlist",
+    "al",
     None,
     "List all users allowed to pm you.",
     "allowlist",
