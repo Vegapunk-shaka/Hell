@@ -142,7 +142,7 @@ async def watch_order(_, message: Message):
     await hell.edit(caption, disable_web_page_preview=True)
 
 
-HelpMenu("ani").add(
+HelpMenu("anime").add(
     "ani",
     "<name>",
     "Get a detailed information about the mentioned anime.",
