@@ -48,13 +48,13 @@ class HellClient(Client):
                         f"Client #{i+1}: '{me.first_name}' is not in Logger Group! Check and add manually for proper functioning."
                     )
                 try:
-                    await client.join_chat("https://t.me/AnimeKunChannel")
+                    await client.join_chat("https://t.me/Anime_Kun_Channel")    # Channel
                 except:
                     pass
-                try:
-                    await client.join_chat("https://t.me/Anime_Kun_Channel")
-                except:
-                    pass
+                # try:
+                #     await client.join_chat("https://t.me/AnimeKunChannel")  # Group
+                # except:
+                #     pass
             except Exception as e:
                 LOGS.error(f"{i + 1}: {e}")
                 continue
@@ -110,27 +110,27 @@ class HellClient(Client):
     async def start_message(self, version: dict) -> None:
         await self.bot.send_animation(
             Config.LOGGER_ID,
-            "https://te.legra.ph/file/3ecb4a663416118f577c2.mp4",
+            "https://te.legra.ph/file/8deca5343c64d9db9401f.mp4",
             f"**{Symbols.check_mark} RinBot is now Online!**\n\n"
             f"**{Symbols.triangle_right} Clients:** `{len(self.users)}`\n"
             f"**{Symbols.triangle_right} Plugins:** `{len(Config.CMD_MENU)}`\n"
             f"**{Symbols.triangle_right} Commands:** `{len(Config.CMD_INFO)}`\n"
             f"**{Symbols.triangle_right} Stan Users:** `{len(Config.STAN_USERS)}`\n"
             f"**{Symbols.triangle_right} Auth Users:** `{len(Config.AUTH_USERS)}`\n\n"
-            f"**{Symbols.triangle_right} RinBot Version:** `{version['hellbot']}`\n"
+            f"**{Symbols.triangle_right} HellBot Version:** `{version['hellbot']}`\n"
             f"**{Symbols.triangle_right} Pyrogram Version:** `{version['pyrogram']}`\n"
             f"**{Symbols.triangle_right} Python Version:** `{version['python']}`\n\n"
-            f"**</> @Chowdhury_Siam**",
+            f"**</> @Anime_Kun_Channel**",
             parse_mode=ParseMode.MARKDOWN,
             disable_notification=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton("💫 Start Me", url=f"https://t.me/{self.bot.me.username}?start=start"),
-                        InlineKeyboardButton("💖 Repo", url="https://t.me/Chowdhury_Siam"),
+                        InlineKeyboardButton("💖 Repo", url="https://github.com/SiamRin33/Plugins"),
                     ],
                     [
-                        InlineKeyboardButton("🍀 Anime Kun 🍀", url="https://t.me/Anime_Kun_Channel"),
+                        InlineKeyboardButton("🍀 RinBot Networks 🍀", url="https://t.me/AnimeKunChannel"),
                     ],
                 ]
             ),
