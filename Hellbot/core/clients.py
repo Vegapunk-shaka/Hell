@@ -110,14 +110,14 @@ class HellClient(Client):
     async def start_message(self, version: dict) -> None:
         await self.bot.send_animation(
             Config.LOGGER_ID,
-            "https://te.legra.ph/file/8deca5343c64d9db9401f.mp4",
+            "https://te.legra.ph/file/6b9a09bbdaa4c5e6248be.mp4",
             f"**{Symbols.check_mark} RinBot is now Online!**\n\n"
             f"**{Symbols.triangle_right} Clients:** `{len(self.users)}`\n"
             f"**{Symbols.triangle_right} Plugins:** `{len(Config.CMD_MENU)}`\n"
             f"**{Symbols.triangle_right} Commands:** `{len(Config.CMD_INFO)}`\n"
             f"**{Symbols.triangle_right} Stan Users:** `{len(Config.STAN_USERS)}`\n"
             f"**{Symbols.triangle_right} Auth Users:** `{len(Config.AUTH_USERS)}`\n\n"
-            f"**{Symbols.triangle_right} HellBot Version:** `{version['hellbot']}`\n"
+            f"**{Symbols.triangle_right} RinBot Version:** `{version['hellbot']}`\n"
             f"**{Symbols.triangle_right} Pyrogram Version:** `{version['pyrogram']}`\n"
             f"**{Symbols.triangle_right} Python Version:** `{version['python']}`\n\n"
             f"**</> @Anime_Kun_Channel**",
