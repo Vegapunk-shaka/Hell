@@ -50,11 +50,11 @@ async def listecho(client: Client, message: Message):
     if not echos:
         return await hellbot.delete(message, "No echos in this chat!")
 
-    text = "**𝖫𝗂𝗌𝗍 𝗈𝖿 𝖤𝖼𝗁𝗈 𝗂𝗇 𝗍𝗁𝗂𝗌 𝖼𝗁𝖺𝗍:**\n\n"
+    text = "**List of Echo in this chat:**\n\n"
     for echo in echos:
         text += f"    {Symbols.anchor} `{echo}`\n"
 
-    await hellbot.send_message(message.chat.id, text)
+    await hellbot.edit(message, text)
 
 
 @custom_handler(filters.incoming & filters.text & filters.sticker & ~filters.service)
@@ -62,7 +62,6 @@ async def echo_handler(client: Client, message: Message):
     if not await db.is_echo(client.me.id, message.chat.id, message.from_user.id):
         return
 
-    await asyncio.sleep(1)
     if message.sticker:
         await message.reply_sticker(message.sticker.file_id)
     else:
