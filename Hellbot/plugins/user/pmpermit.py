@@ -156,12 +156,12 @@ async def disallow_pm(client: Client, message: Message):
     )
 
 
-@on_message(["al", "approvelist"], allow_stan=True)
+@on_message(["alist", "approvelist"], allow_stan=True)
 async def allowlist(client: Client, message: Message):
     hell = await hellbot.edit(message, "`Fetching allowlist...`")
     users = await db.get_all_pmpermits(client.me.id)
     if not users:
-        return await hell.edit("`No users allowed to pm!`")
+        return await hellbot.delete(hell, "`No users allowed to pm!`")
 
     text = "**🍀 Approved User's List:**\n\n"
     for user in users:
@@ -269,26 +269,26 @@ HelpMenu("pmpermit").add(
     "b",
     "<reply to user>/<userid/username>",
     "Block a user from pm-ing you.",
-    "block @Chowdhury_Siam",
+    "block @ForGo10God",
 ).add(
     "unb",
     "<reply to user>/<userid/username>",
     "Unblock a user from pm-ing you.",
-    "unblock @Chowdhury_Siam",
+    "unblock @ForGo10God",
 ).add(
     "a",
     "<reply to user>/<userid/username>",
     "Allow a user to pm you.",
-    "allow @Chowdhury_Siam",
+    "allow @ForGo10God",
     "An alias of 'approve' is also available.",
 ).add(
     "da",
     "<reply to user>/<userid/username>",
     "Disallow a user to pm you.",
-    "disallow @Chowdhury_Siam",
+    "disallow @ForGo10God",
     "An alias of 'disapprove' is also available.",
 ).add(
-    "al",
+    "alist",
     None,
     "List all users allowed to pm you.",
     "allowlist",
