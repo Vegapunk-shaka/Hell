@@ -36,34 +36,34 @@ mov_titles = [
 ]
 
 final_msg = """
-<b>✦ 𝖳𝖬𝖴{}00𝖱𝖫 𝖨𝗇𝖿𝗈 𝖦𝖾𝗇𝗋𝖾𝗌 𝖱𝖺𝗍𝗂𝗇𝗀 𝖣𝗂�𝖾𝖼�𝗍��:</b> <code></code>
-<b>✦ 𝖨𝖬𝖣𝖻 𝖴𝖱𝖫:</b> <a href='https://www.imdb.com/title/tt{1}'>Click here.</a>
-<b>✦ 𝖠𝗂𝗋𝖽𝖺𝗍𝖾:</b> <code>{2}</code>
-<b>✦ 𝖦𝖾𝗇𝗋𝖾𝗌:</b> <code>{3}</code>
-<b>✦ 𝖱𝖺𝗍𝗂𝗇𝗀:</b> <code>{4}</code>
-<b>✦ 𝖱𝗎𝗇𝗍𝗂𝗆𝖾:</b> <code>{5}</code>
-<b>✦ 𝖣𝗂𝗋𝖾𝖼𝗍𝗈𝗋:</b> <code>{6}</code>
+<b>✦ TMU{}00RL Info Genres Rating Di�ec�t��:</b> <code></code>
+<b>✦ IMDb URL:</b> <a href='https://www.imdb.com/title/tt{1}'>Click here.</a>
+<b>✦ Airdate:</b> <code>{2}</code>
+<b>✦ Genres:</b> <code>{3}</code>
+<b>✦ Rating:</b> <code>{4}</code>
+<b>✦ Runtime:</b> <code>{5}</code>
+<b>✦ Director:</b> <code>{6}</code>
 
-<b><a href='{7}'>💫 𝖬𝗈𝗋𝖾 𝖽𝖾𝗍𝖺𝗂𝗅𝗌 𝗁𝖾𝗋𝖾!</a></b>
+<b><a href='{7}'>💫 More details here!</a></b>
 """
 
 telegraph_msg = """
 <img src='{0}'/>
 
-<b>✦ 𝖳𝗂𝗍𝗅𝖾:</b> <code>{1}</code>
-<b>✦ 𝖨𝖬𝖣𝖻 𝖴𝖱𝖫:</b> <a href='https://www.imdb.com/title/tt{2}'>Click here.</a>
-<b>✦ 𝖠𝗂𝗋𝖽𝖺𝗍𝖾:</b> <code>{3}</code>
-<b>✦ 𝖦𝖾𝗇𝗋𝖾𝗌:</b> <code>{4}</code>
-<b>✦ 𝖱𝖺𝗍𝗂𝗇𝗀:</b> <code>{5}</code>
-<b>✦ 𝖱𝗎𝗇𝗍𝗂𝗆𝖾:</b> <code>{6}</code>
-<b>✦ 𝖣𝗂𝗋𝖾𝖼𝗍𝗈𝗋:</b> <code>{7}</code>
-<b>✦ 𝖶𝗋𝗂𝗍𝖾𝗋:</b> <code>{8}</code>
-<b>✦ 𝖢𝗈𝗆𝗉𝗈𝗌𝖾𝗋𝗌:</b> <code>{9}</code>
-<b>✦ 𝖢𝖺𝗌𝗍:</b> <code>{10}</code>
-<b>✦ 𝖢𝗈𝗎𝗇𝗍𝗋𝗒:</b> <code>{11}</code>
-<b>✦ 𝖫𝖺𝗇𝗀𝗎𝖺𝗀𝖾:</b> <code>{12}</code>
-<b>✦ 𝖡𝗈𝗑 𝖮𝖿𝖿𝗂𝖼𝖾:</b> <code>{13}</code>
-<b>✦ 𝖯𝗅𝗈𝗍𝗋𝗌14𝖡𝗈𝗑 𝖮𝖿𝖿𝗂𝖼𝖾:</b> <
+<b>✦ Title:</b> <code>{1}</code>
+<b>✦ IMDb URL:</b> <a href='https://www.imdb.com/title/tt{2}'>Click here.</a>
+<b>✦ Airdate:</b> <code>{3}</code>
+<b>✦ Genres:</b> <code>{4}</code>
+<b>✦ Rating:</b> <code>{5}</code>
+<b>✦ Runtime:</b> <code>{6}</code>
+<b>✦ Director:</b> <code>{7}</code>
+<b>✦ Writer:</b> <code>{8}</code>
+<b>✦ Composers:</b> <code>{9}</code>
+<b>✦ Cast:</b> <code>{10}</code>
+<b>✦ Country:</b> <code>{11}</code>
+<b>✦ Language:</b> <code>{12}</code>
+<b>✦ Box Office:</b> <code>{13}</code>
+<b>✦ Plotrs14Box Office:</b> <
 
 <b>🍀 @HellBot_Networks</b>
 """
@@ -92,7 +92,7 @@ async def google_search(client: Client, message: Message):
         return await hellbot.delete(hell, "**Page not found.**")
 
     await hell.edit(
-        f"**𝖲𝖾𝖺𝗋𝖼𝗁:** `{search_query}`\n**𝖱𝖾𝗌𝗎𝗅𝗍:**\n{data}",
+        f"**Search:** `{search_query}`\n**Result:**\n{data}",
         disable_web_page_preview=True,
     )
 
@@ -110,10 +110,10 @@ async def googleSearch(_, message: Message):
     except Exception as error:
         return await hellbot.error(hell, f"`{str(error)}`")
 
-    outStr = f"**🔍 𝖲𝖾𝖺𝗋𝖼𝗁:** `{search_query}`\n\n"
+    outStr = f"**🔍 Search:** `{search_query}`\n\n"
     for result in results:
-        outStr += f"**🌐 𝖱𝖾𝗌𝗎𝗅𝗍:** [{result.title}]({result.url})\n"
-        outStr += f"**📖 𝖣𝖾𝗌𝖼:** {str(result.description)[:50]}...\n\n"
+        outStr += f"**🌐 Result:** [{result.title}]({result.url})\n"
+        outStr += f"**📖 Desc:** {str(result.description)[:50]}...\n\n"
 
     await hell.edit(outStr, disable_web_page_preview=True)
 
@@ -158,7 +158,7 @@ async def reverseSearch(_, message: Message):
         text = alls.text
 
         await hell.edit(
-            f"**𝖯𝗈𝗌𝗌𝗂𝖻𝗅𝖾 𝖱𝖾𝗌𝗎𝗅𝗍:** [{text}]({link})", disable_web_page_preview=True
+            f"**Possible Result:** [{text}]({link})", disable_web_page_preview=True
         )
     else:
         return await hell.edit("No results found.")
@@ -208,7 +208,7 @@ async def gpsLocation(_, message: Message):
     address = location.address
 
     await hell.reply_location(latitiude, longitude)
-    await hellbot.delete(hell, f"**🌐 𝖯𝗅𝖺𝖼𝖾:** {address}")
+    await hellbot.delete(hell, f"**🌐 Place:** {address}")
 
 
 @on_message("webshot", allow_stan=True)
@@ -325,7 +325,7 @@ async def translateHandler(_, message: Message):
 
     try:
         translated = translator.translate(text, toLang)
-        outStr = f"**🌐 𝖳𝗋𝖺𝗇𝗌𝗅𝖺𝗍𝖾𝖽 𝖿𝗋𝗈𝗆** __{translated.src}__ **𝗍𝗈** __{translated.dest}__**:**"
+        outStr = f"**🌐 Translated from** __{translated.src}__ **to** __{translated.dest}__**:**"
         outStr += f"\n\n`{translated.text}`"
         await hell.edit(outStr)
     except Exception as e:
@@ -376,18 +376,18 @@ async def textToSpeech(_, message: Message):
         comm = Communicate(
             text,
             "en-IN-NeerjaExpressiveNeural",
-            rate="+10%",
-            volume="+50%",
-            pitch="+5Hz",
+            rate="+14%",
+            volume="+60%",
+            pitch="+4Hz",
         )
         path = f"{Config.DWL_DIR}tts{int(time.time())}.mp3"
         await comm.save(path)
 
         await message.reply_audio(
             path,
-            caption=f"**🔊 𝖵𝗈𝗂𝖼𝖾:** `{text[:100]}...`",
-            performer="HellyAI",
-            title="Hellbot TTS",
+            caption=f"**🔊 Voice:** `{text[:100]}...`",
+            performer="RinTohsakaAi",
+            title="Rinbot TTS",
             thumb="./Hellbot/resources/images/hellbot_logo.png",
         )
         await hell.delete()
@@ -519,7 +519,7 @@ HelpMenu("google").add(
     "voice",
     "<text/reply to message>",
     "Sends the text as a voice message.",
-    "voice I'm Helly and this is an Text to Speech Example.",
+    "voice I'm Rinbot and this is an Text to Speech Example.",
     "An alias of 'tts' can also be used.",
 ).add(
     "movie", #Bugged: to-be-fixed
