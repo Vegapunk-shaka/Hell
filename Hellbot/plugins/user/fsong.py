@@ -5,45 +5,37 @@ from pyrogram.types import Message
 
 from . import Config, HelpMenu, db, hellbot, on_message
 
+@on_message("fs", allow_stan=True)
+async def kangSticker(client: Client, message: Message):
+    if not message.reply_to_message:
+        return await hellbot.delete(message, "__Reply to any user's audio or video message.__.")
 
-@hell_cmd(pattern="fs(?:\s|$)([\s\S]*)")
-async def find_audio_or_video(hellevent):
-    if not hellevent.reply_to_msg_id:
-        await eod(hellevent, "__Reply to any user's audio or video message.__")
-        return
-
-    reply_message = await hellevent.get_reply_message()
+    reply_message = await hellbot.get_reply_message()
     if not reply_message.media and not reply_message.document:
-        await eod(hellevent, "__Reply to an audio or video file.__")
+        await eod(hellbot, "__Reply to an audio or video file.__")
         return
 
     # Check if the replied message is an audio or video file
     if reply_message.media and (reply_message.media.document.mime_type.startswith('audio') or reply_message.media.document.mime_type.startswith('video')):
         chat = "@Music_Source_Bot"
     else:
-        await eod(hellevent, "__You can only reply to audio or video files.__")
+        await eod(hellbot, "__You can only reply to audio or video files.__")
         return
 
     if reply_message.sender.bot:
-        await eod(hellevent, "__Reply to an actual user's message.__")
+        await eod(hellbot, "__Reply to an actual user's message.__")
         return
 
-    MSG = await eor(hellevent, "__Sending the file to the Database__")
+    MSG = await eor(hellbot, "__Sending the file to the Database__")
 
-    async with hellevent.client.conversation(chat) as conv:
+    async with hellbot.client.conversation(chat) as conv:
         try:
             await conv.send_message("/start")
             await asyncio.sleep(0.8)
-            await conv.send_file(reply_message)
-        except YouBlockedUserError:
-            await eod(hellevent, "Unblock @Music_Source_Bot and try again.")
-            return
-
-        await asyncio.sleep(0.8)
-        await MSG.edit("**Done**")
-        await asyncio.sleep(0.8)
-        await MSG.edit("__Searching the song in the server__")
-        await asyncio.sleep(0.8)
+            await MSG.edit("**Done**")
+            await asyncio.sleep(0.8)
+            await MSG.edit("__Searching the song in the server__")
+            await asyncio.sleep(0.8)
 
         try:
             response = await conv.get_response(timeout=10)
@@ -79,13 +71,13 @@ async def find_audio_or_video(hellevent):
         await dlt.delete()
 
         if "The song could not be found. Try again.​" in response2.text:
-            msg_dlt = await hellevent.client.send_message(hellevent.chat_id, response2.text.strip(), reply_to=reply_message)
+            msg_dlt = await hellbot.client.send_message(hellbot.chat_id, response2.text.strip(), reply_to=reply_message)
             await asyncio.sleep(12)
             await msg_dlt.delete()
         elif response3 and response3.media:
-            await hellevent.client.send_file(hellevent.chat_id, response3.media, caption=response_text.strip(, reply_to=reply_message)
+            await hellbot.client.send_file(hellbot.chat_id, response3.media, caption=response_text.strip(, reply_to=reply_message)
         else:
-            await hellevent.client.send_message(hellevent.chat_id, response_text.strip(), reply_to=reply_message)
+            await hellbot.client.send_message(hellbot.chat_id, response_text.strip(), reply_to=reply_message)
 
 
 
