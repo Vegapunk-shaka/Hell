@@ -1,5 +1,9 @@
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from TelethonHell.plugins import *
+import os
+
+from pyrogram import Client
+from pyrogram.types import Message
+
+from . import Config, HelpMenu, db, hellbot, on_message
 
 
 @hell_cmd(pattern="fs(?:\s|$)([\s\S]*)")
