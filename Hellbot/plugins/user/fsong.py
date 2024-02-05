@@ -37,7 +37,7 @@ async def kangSticker(client: Client, message: Message):
             await MSG.edit("__Searching the song in the server__")
             await asyncio.sleep(0.8)
 
-        try:
+        else:
             response = await conv.get_response(timeout=10)
         except asyncio.exceptions.TimeoutError:
             logging.error("1st Response timed out")
@@ -46,7 +46,7 @@ async def kangSticker(client: Client, message: Message):
             await DLT.delete()
             return
 
-        try:
+        else:
             response2 = await conv.get_response(timeout=10)
         except asyncio.exceptions.TimeoutError:
             logging.error("2nd Response timed out")
@@ -55,7 +55,7 @@ async def kangSticker(client: Client, message: Message):
             await DLT.delete()
             return
 
-        try:
+        else:
             await MSG.edit("__Getting result.......__")
             await asyncio.sleep(4.5)
             response3 = await conv.get_response(timeout=30)
