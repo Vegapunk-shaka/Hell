@@ -5,7 +5,7 @@ from pyrogram.types import Message
 
 from . import Config, HelpMenu, db, hellbot, on_message
 
-@on_message("fs", allow_stan=True)
+@on_message(["fs", "fsong"], allow_stan=True)
 async def kangSticker(client: Client, message: Message):
     if not message.reply_to_message:
         return await hellbot.delete(message, "__Reply to any user's audio or video message.__.")
