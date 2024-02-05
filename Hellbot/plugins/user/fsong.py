@@ -82,7 +82,7 @@ async def kangSticker(client: Client, message: Message):
 
 
 HelpMenu("fsong").add(
-    "fsong",
+    "fs",
     " ",
     "Fetches the Song name of the replied audio or video",
     "fsong song finder",
