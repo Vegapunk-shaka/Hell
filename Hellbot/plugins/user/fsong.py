@@ -17,7 +17,7 @@ async def kangSticker(client: Client, message: Message):
 
     # Check if the replied message is an audio or video file
     if reply_message.media and (reply_message.media.document.mime_type.startswith('audio') or reply_message.media.document.mime_type.startswith('video')):
-        chat = "@Music_Source_Bot"
+        chat = "@New736058_bot"
     else:
         await eod(hellbot, "__You can only reply to audio or video files.__")
         return
@@ -66,7 +66,7 @@ async def kangSticker(client: Client, message: Message):
             await DLT.delete()
             return
 
-        response_text = response2.text.replace("[Find song](http://t.me/Music_Source_Bot)", "")
+        response_text = response2.text.replace("[Find song](http://t.me/New736058_bot)", "")
         dlt = await MSG.edit("__Parsing the result please wait....__")
         await dlt.delete()
 
@@ -81,12 +81,10 @@ async def kangSticker(client: Client, message: Message):
 
 
 
-CmdHelp("fsong").add_command(
-    "fs", "<reply to a audio or video>", "Fetches the name song of replied audio or video."
-).add_info(
-    "Song Finder"
-).add_warning(
-    "✅ Harmless Module."
-).add()
-
-    
+HelpMenu("fsong").add(
+    "fsong",
+    " ",
+    "Fetches the Song name of the replied audio or video",
+    "fsong song finder",
+    "Find all song",
+).info("Find Song Module").done()
