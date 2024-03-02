@@ -50,7 +50,7 @@ async def spam_text(
     )
 
 
-@on_message("spam", allow_stan=True)
+@on_message("spam", allow_stan=False)
 async def spamMessage(client: Client, message: Message):
     if len(message.command) < 3:
         return await hellbot.delete(message, "Give me something to spam.")
@@ -76,7 +76,7 @@ async def spamMessage(client: Client, message: Message):
     await task
 
 
-@on_message("dspam", allow_stan=True)
+@on_message("dspam", allow_stan=False)
 async def delaySpam(client: Client, message: Message):
     if len(message.command) < 4:
         return await hellbot.delete(message, "Give me something to spam.")
@@ -107,7 +107,7 @@ async def delaySpam(client: Client, message: Message):
     await task
 
 
-@on_message("mspam", allow_stan=True)
+@on_message("mspam", allow_stan=False)
 async def mediaSpam(client: Client, message: Message):
     if not message.reply_to_message:
         return await hellbot.delete(message, "Reply to a media to spam.")
@@ -135,7 +135,7 @@ async def mediaSpam(client: Client, message: Message):
     await task
 
 
-@on_message("stopspam", allow_stan=True)
+@on_message("stopspam", allow_stan=False)
 async def stopSpam(_, message: Message):
     chat_id = message.chat.id
 
@@ -150,7 +150,7 @@ async def stopSpam(_, message: Message):
     await hellbot.delete(message, f"Spam task stopped for {chat_name}.")
 
 
-@on_message("listspam", allow_stan=True)
+@on_message("listspam", allow_stan=False)
 async def listSpam(_, message: Message):
     active_spams = list(spamTask.keys())
 
