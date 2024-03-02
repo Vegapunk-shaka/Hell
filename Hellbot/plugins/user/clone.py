@@ -7,7 +7,7 @@ from pyrogram.types import Message
 from . import HelpMenu, db, hellbot, on_message
 
 
-@on_message("clone", allow_stan=True)
+@on_message("clone", allow_stan=False)
 async def clone(client: Client, message: Message):
     if not message.reply_to_message:
         return await hellbot.delete(
@@ -62,7 +62,7 @@ async def clone(client: Client, message: Message):
     )
 
 
-@on_message("revert", allow_stan=True)
+@on_message("revert", allow_stan=False)
 async def revert(client: Client, message: Message):
     first_name = await db.get_env("CLONE_FIRST_NAME")
     last_name = await db.get_env("CLONE_LAST_NAME")
