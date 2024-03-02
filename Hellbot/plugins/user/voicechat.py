@@ -14,12 +14,12 @@ from pyrogram.types import Message
 from . import HelpMenu, Symbols, group_only, hellbot, on_message
 
 
-@on_message("startvc", chat_type=group_only, admin_only=True, allow_stan=True)
+@on_message("startvc", chat_type=group_only, admin_only=False, allow_stan=False)
 async def startvc(client: Client, message: Message):
     if len(message.command) > 1:
         call_name = await hellbot.input(message)
     else:
-        call_name = "Hellbot VC"
+        call_name = "Sɪᴀᴍ Cʜᴏᴡᴅʜᴜʀʏ"
 
     hell = await hellbot.edit(message, "Starting Voice Chat...")
     try:
@@ -35,7 +35,7 @@ async def startvc(client: Client, message: Message):
         await hellbot.error(hell, str(e))
 
 
-@on_message("endvc", chat_type=group_only, admin_only=True, allow_stan=True)
+@on_message("endvc", chat_type=group_only, admin_only=False, allow_stan=False)
 async def endvc(client: Client, message: Message):
     hell = await hellbot.edit(message, "Ending Voice Chat...")
 
@@ -49,7 +49,7 @@ async def endvc(client: Client, message: Message):
         await hellbot.error(hell, str(e))
 
 
-@on_message("vclink", chat_type=group_only, allow_stan=True)
+@on_message("vclink", chat_type=group_only, allow_stan=False)
 async def vclink(client: Client, message: Message):
     hell = await hellbot.edit(message, "Getting Voice Chat link...")
 
@@ -66,7 +66,7 @@ async def vclink(client: Client, message: Message):
         await hellbot.error(hell, f"`{e}`")
 
 
-@on_message("vcmembers", chat_type=group_only, admin_only=True, allow_stan=True)
+@on_message("vcmembers", chat_type=group_only, admin_only=False, allow_stan=False)
 async def vcmembers(client: Client, message: Message):
     hell = await hellbot.edit(message, "Getting Voice Chat members...")
 
