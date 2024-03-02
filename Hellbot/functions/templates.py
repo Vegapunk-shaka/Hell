@@ -6,11 +6,11 @@ from Hellbot.core import ENV, db
 ALIVE_TEMPLATES = [
     (
         "•────────────────•\n"
-        "•       RinBᴏᴛ Is Aʟɪᴠᴇ        •\n"
+        "•       Rɪɴʙᴏᴛ ɪꜱ ᴀʟɪᴠᴇ        •\n"
         "╭────────────────•\n"
         "╰➢ ᴏᴡɴᴇʀ » {owner}\n"
         "╰➢ ᴘʏʀᴏɢʀᴀᴍ » {pyrogram}\n"
-        "╰➢ ʜᴇʟʟʙᴏᴛ » {hellbot}\n"
+        "╰➢ Rɪɴʙᴏᴛ » {hellbot}\n"
         "╰➢ ᴘʏᴛʜᴏɴ » {python}\n"
         "╰➢ ᴜᴘᴛɪᴍᴇ » {uptime}\n"
         "╰────────────────•\n"
@@ -20,11 +20,11 @@ ALIVE_TEMPLATES = [
 ]
 
 PING_TEMPLATES = [
-    """**🍀 Ping!**
+    """**🍀 Pɪɴɢ!**
 
-    ⚘  **ѕρєє∂:** {speed} m/s
-    ⚘  **υρтιмє:** {uptime}
-    ⚘  **σωηєя:** {owner}""",
+    ⚘  **Sᴘᴇᴇᴅ:** {speed} m/s
+    ⚘  **Uᴘᴛɪᴍᴇ:** {uptime}
+    ⚘  **Oᴡɴᴇʀ:** {owner}""",
 ]
 
 HELP_MENU_TEMPLATES = [
