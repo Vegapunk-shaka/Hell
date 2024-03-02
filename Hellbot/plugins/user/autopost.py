@@ -6,7 +6,7 @@ from Hellbot.core import Symbols
 from . import HelpMenu, custom_handler, db, group_n_channel, hellbot, on_message
 
 
-@on_message("autopost", chat_type=group_n_channel, allow_stan=True)
+@on_message("autopost", chat_type=group_n_channel, allow_stan=False)
 async def autopost(client: Client, message: Message):
     if len(message.command) != 2:
         return await hellbot.delete(
@@ -47,7 +47,7 @@ async def autopost(client: Client, message: Message):
     )
 
 
-@on_message("stopautopost", chat_type=group_n_channel, allow_stan=True)
+@on_message("stopautopost", chat_type=group_n_channel, allow_stan=False)
 async def stop_autopost(client: Client, message: Message):
     if len(message.command) != 2:
         return await hellbot.delete(
@@ -81,7 +81,7 @@ async def stop_autopost(client: Client, message: Message):
     )
 
 
-@on_message("autoposts", chat_type=group_n_channel, allow_stan=True)
+@on_message("autoposts", chat_type=group_n_channel, allow_stan=False)
 async def autoposts(client: Client, message: Message):
     hell = await hellbot.edit(message, "Getting autopost list...")
 
