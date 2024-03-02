@@ -43,7 +43,7 @@ async def youtube_audio(_, message: Message):
             f"{yt_file}.mp3",
             caption=f"**🎧 Title:** {yt_data['title']} \n\n**👀 Views:** `{yt_data['view_count']}` \n**⌛ Duration:** `{secs_to_mins(int(yt_data['duration']))}`",
             duration=int(yt_data["duration"]),
-            performer="[тнє нєllвσт]",
+            performer="[Sɪᴀᴍ Cʜᴏᴡᴅʜᴜʀʏ]",
             title=yt_data["title"],
             thumb=f"{yt_file}.jpg",
             progress=progress,
