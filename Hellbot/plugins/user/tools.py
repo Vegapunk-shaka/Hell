@@ -29,7 +29,7 @@ async def base64enc(_, message: Message):
     hell = await hellbot.edit(message, "Encoding...")
 
     encoded = base64.b64encode(text.encode()).decode()
-    await hell.edit(f"**𝖡𝖺𝗌𝖾64 𝖤𝗇𝖼𝗈𝖽𝖾𝖽:**\n\n`{encoded}`")
+    await hell.edit(f"**Base64 Encoded:**\n\n`{encoded}`")
 
 
 @on_message("base64dec", allow_stan=True)
@@ -48,7 +48,7 @@ async def base64dec(_, message: Message):
     hell = await hellbot.edit(message, "Decoding...")
 
     decoded = base64.b64decode(text.encode()).decode()
-    await hell.edit(f"**𝖡𝖺𝗌𝖾64 𝖣𝖾𝖼𝗈𝖽𝖾𝖽:**\n\n`{decoded}`")
+    await hell.edit(f"**Base64 Decoded:**\n\n`{decoded}`")
 
 
 @on_message(["calculate", "calc"], allow_stan=True)
@@ -64,7 +64,7 @@ async def calculator(_, message: Message):
         result = "Invalid Expression"
 
     await hell.edit(
-        f"**{Symbols.bullet} 𝖤𝗑𝗉𝗋𝖾𝗌𝗌𝗂𝗈𝗇:** `{query}`\n\n**{Symbols.bullet} 𝖱𝖾𝗌𝗎𝗅𝗍,,:**\n`{result}`"
+        f"**{Symbols.bullet} Expression:** `{query}`\n\n**{Symbols.bullet} Result,,:**\n`{result}`"
     )
 
 
@@ -103,7 +103,7 @@ async def maths(_, message: Message):
         result = math.pow(int(query), 2)
 
     await hell.edit(
-        f"**{Symbols.bullet} 𝖤𝗑𝗉𝗋𝖾𝗌𝗌𝗂𝗈𝗇:** `{cmd} {query}`\n\n**{Symbols.bullet} 𝖱𝖾𝗌𝗎𝗅𝗍,,:**\n`{result}`"
+        f"**{Symbols.bullet} Expression:** `{cmd} {query}`\n\n**{Symbols.bullet} Result,,:**\n`{result}`"
     )
 
 
