@@ -11,7 +11,7 @@ from Hellbot.functions.templates import gban_templates
 from . import Config, HelpMenu, Symbols, custom_handler, db, hellbot, on_message
 
 
-@on_message("gpromote", allow_stan=True)
+@on_message("gpromote", allow_stan=False)
 async def globalpromote(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -37,12 +37,12 @@ async def globalpromote(client: Client, message: Message):
     privileges = ChatPrivileges(
         can_manage_chat=True,
         can_delete_messages=True,
-        can_manage_video_chats=True,
+        can_manage_video_chats=False,
         can_restrict_members=False,
         can_promote_members=False,
         can_change_info=False,
         can_invite_users=True,
-        can_pin_messages=True,
+        can_pin_messages=False,
         is_anonymous=False,
     )
 
@@ -72,7 +72,7 @@ async def globalpromote(client: Client, message: Message):
 
     await hell.edit(
         await gban_templates(
-            gtype="𝖦-𝖯𝗋𝗈𝗆𝗈𝗍𝖾",
+            gtype="G-Promote",
             name=user.mention,
             success=success,
             failed=failed,
@@ -86,7 +86,7 @@ async def globalpromote(client: Client, message: Message):
     )
 
 
-@on_message("gdemote", allow_stan=True)
+@on_message("gdemote", allow_stan=False)
 async def globaldemote(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -147,7 +147,7 @@ async def globaldemote(client: Client, message: Message):
 
     await hell.edit(
         await gban_templates(
-            gtype="𝖦-𝖣𝖾𝗆𝗈𝗍𝖾",
+            gtype="G-Demote",
             name=user.mention,
             success=success,
             failed=failed,
@@ -161,7 +161,7 @@ async def globaldemote(client: Client, message: Message):
     )
 
 
-@on_message("gban", allow_stan=True)
+@on_message("gban", allow_stan=False)
 async def globalban(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -222,7 +222,7 @@ async def globalban(client: Client, message: Message):
 
     await hell.edit(
         await gban_templates(
-            gtype="𝖦-𝖡𝖺𝗇",
+            gtype="G-Ban",
             name=user.mention,
             success=success,
             failed=failed,
@@ -236,7 +236,7 @@ async def globalban(client: Client, message: Message):
     )
 
 
-@on_message("ungban", allow_stan=True)
+@on_message("ungban", allow_stan=False)
 async def unglobalban(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -260,7 +260,7 @@ async def unglobalban(client: Client, message: Message):
         Config.BANNED_USERS.remove(user.id)
         await hellbot.edit(
             message,
-            f"**𝖴𝗇𝗀𝖻𝖺𝗇𝗇𝖾𝖽** {user.mention}!\n\n**𝖦𝖻𝖺𝗇 𝖱𝖾𝖺𝗌𝗈𝗇 𝗐𝖺𝗌:** `{reason}`",
+            f"**Ungbanned** {user.mention}!\n\n**Gban Reason was:** `{reason}`",
         )
 
     async for dialog in client.get_dialogs():
@@ -283,7 +283,7 @@ async def unglobalban(client: Client, message: Message):
     )
 
 
-@on_message("gkick", allow_stan=True)
+@on_message("gkick", allow_stan=False)
 async def globalkick(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -347,7 +347,7 @@ async def globalkick(client: Client, message: Message):
 
     await hell.edit(
         await gban_templates(
-            gtype="𝖦-𝖪𝗂𝖼𝗄",
+            gtype="G-Kick",
             name=user.mention,
             success=success,
             failed=failed,
@@ -361,7 +361,7 @@ async def globalkick(client: Client, message: Message):
     )
 
 
-@on_message("gmute", allow_stan=True)
+@on_message("gmute", allow_stan=False)
 async def globalmute(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -423,7 +423,7 @@ async def globalmute(client: Client, message: Message):
 
     await hell.edit(
         await gban_templates(
-            gtype="𝖦-𝖬𝗎𝗍𝖾",
+            gtype="G-Mute",
             name=user.mention,
             success=success,
             failed=failed,
@@ -437,7 +437,7 @@ async def globalmute(client: Client, message: Message):
     )
 
 
-@on_message("ungmute", allow_stan=True)
+@on_message("ungmute", allow_stan=False)
 async def unglobalmute(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -460,7 +460,7 @@ async def unglobalmute(client: Client, message: Message):
         Config.MUTED_USERS.remove(user.id)
         await hellbot.edit(
             message,
-            f"**𝖴𝗇𝗀𝗆𝗎𝗍𝖾𝖽** {user.mention}!\n\n**𝖦𝗆𝗎𝗍𝖾 𝖱𝖾𝖺𝗌𝗈𝗇 𝗐𝖺𝗌:** `{reason}`",
+            f"**Ungmuted** {user.mention}!\n\n**Gmute Reason was:** `{reason}`",
         )
 
     permissions = ChatPermissions(can_send_messages=True)
@@ -485,14 +485,14 @@ async def unglobalmute(client: Client, message: Message):
     )
 
 
-@on_message("gbanlist", allow_stan=True)
+@on_message("gbanlist", allow_stan=False)
 async def gbanlist(_, message: Message):
     gban_users = await db.get_gban()
     if not gban_users:
         return await hellbot.delete(message, "No gbanned users.")
 
     hell = await hellbot.edit(message, "Fetching gbanned users...")
-    text = f"**💥 𝖦𝖻𝖺𝗇𝗇𝖾𝖽 𝖴𝗌𝖾𝗋𝗌:** __{len(gban_users)}__\n\n"
+    text = f"**💥 Gbanned Users:** __{len(gban_users)}__\n\n"
 
     for user in gban_users:
         text += f"{Symbols.bullet} `{user['user_id']}` | __{user['reason']}__\n\n"
@@ -500,14 +500,14 @@ async def gbanlist(_, message: Message):
     await hell.edit(text)
 
 
-@on_message("gmutelist", allow_stan=True)
+@on_message("gmutelist", allow_stan=False)
 async def gmutelist(_, message: Message):
     gmute_users = await db.get_gmute()
     if not gmute_users:
         return await hellbot.delete(message, "No gmuted users.")
 
     hell = await hellbot.edit(message, "Fetching gmuted users...")
-    text = f"**😶 𝖦𝗆𝗎𝗍𝖾𝖽 𝖴𝗌𝖾𝗋𝗌:** __{len(gmute_users)}__\n\n"
+    text = f"**😶 Gmuted Users:** __{len(gmute_users)}__\n\n"
 
     for user in gmute_users:
         text += f"{Symbols.bullet} `{user['user_id']}` | __{user['reason']}__\n\n"
@@ -531,11 +531,11 @@ async def globalbanwatcher(_, message: Message):
 
     if await db.is_gbanned(message.from_user.id):
         gban_data = await db.get_gban_user(message.from_user.id)
-        watchertext = f"**𝖦𝖻𝖺𝗇𝗇𝖾𝖽 𝖴𝗌𝖾𝗋 𝗃𝗈𝗂𝗇𝖾𝖽 𝗍𝗁𝖾 𝖼𝗁𝖺𝗍! \n\n{Symbols.bullet} 𝖦𝖻𝖺𝗇 𝖱𝖾𝖺𝗌𝗈𝗇 𝗐𝖺𝗌:** __{gban_data['reason']}__\n**{Symbols.bullet} 𝖦𝖻𝖺𝗇 𝖣𝖺𝗍𝖾:** __{gban_data['date']}__\n\n"
+        watchertext = f"**Gbanned User joined the chat! \n\n{Symbols.bullet} Gban Reason was:** __{gban_data['reason']}__\n**{Symbols.bullet} Gban Date:** __{gban_data['date']}__\n\n"
 
         try:
             await message.chat.ban_member(message.from_user.id)
-            watchertext += f"**𝖲𝗈𝗋𝗋𝗒 𝖨 𝖼𝖺𝗇'𝗍 𝗌𝖾𝖾 𝗒𝗈𝗎 𝗂𝗇 𝗍𝗁𝗂𝗌 𝖼𝗁𝖺𝗍!**"
+            watchertext += f"**Sorry I can't see you in this chat!**"
         except BaseException:
             watchertext += f"Reported to @admins"
 
