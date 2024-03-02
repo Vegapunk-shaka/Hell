@@ -35,7 +35,7 @@ WARNS = {}
 PREV_MESSAGE = {}
 
 
-@on_message("b", allow_stan=True)
+@on_message("b", allow_stan=False)
 async def block_user(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -67,7 +67,7 @@ async def block_user(client: Client, message: Message):
         await hellbot.error(message, f"`Couldn't block {user.mention}`")
 
 
-@on_message("unb", allow_stan=True)
+@on_message("unb", allow_stan=False)
 async def unblock_user(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -94,7 +94,7 @@ async def unblock_user(client: Client, message: Message):
         await hellbot.error(message, f"`Couldn't unblock {user.mention}`")
 
 
-@on_message(["a", "approve"], allow_stan=True)
+@on_message(["a", "approve"], allow_stan=False)
 async def allow_pm(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -124,7 +124,7 @@ async def allow_pm(client: Client, message: Message):
     await hellbot.delete(message, f"**{Symbols.check_mark} Allowed:** {user_mention}")
 
 
-@on_message(["da", "disapprove"], allow_stan=True)
+@on_message(["da", "disapprove"], allow_stan=False)
 async def disallow_pm(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -156,7 +156,7 @@ async def disallow_pm(client: Client, message: Message):
     )
 
 
-@on_message(["alist", "approvelist"], allow_stan=True)
+@on_message(["alist", "approvelist"], allow_stan=False)
 async def allowlist(client: Client, message: Message):
     hell = await hellbot.edit(message, "`Fetching allowlist...`")
     users = await db.get_all_pmpermits(client.me.id)
@@ -174,7 +174,7 @@ async def allowlist(client: Client, message: Message):
     await hell.edit(text)
 
 
-@on_message("pm", allow_stan=True)
+@on_message("pm", allow_stan=False)
 async def set_pmpermit(_, message: Message):
     if len(message.command) < 2:
         status = await db.get_env(ENV.pmpermit)
