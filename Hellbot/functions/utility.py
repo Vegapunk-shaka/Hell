@@ -15,7 +15,7 @@ from .formatter import readable_time
 
 class TelegraphAPI:
     def __init__(self) -> None:
-        self.shortname: str = "TheHellbot"
+        self.shortname: str = "TheRinbot"
         self.telegraph: Telegraph = None
 
     async def setup(self):
@@ -76,7 +76,7 @@ class Gcast:
                         await self._send_msg(dialog.chat.id, message, tag)
                         count += 1
                     except FloodWait as fw:
-                        await asyncio.sleep(fw.x)
+                        await asyncio.sleep(fw.value)
                         await self._send_msg(dialog.chat.id, message, tag)
                         count += 1
                     except Exception as e:
@@ -98,7 +98,7 @@ class Gcast:
                         await self._send_msg(dialog.chat.id, message, tag)
                         count += 1
                     except FloodWait as fw:
-                        await asyncio.sleep(fw.x)
+                        await asyncio.sleep(fw.value)
                         await self._send_msg(dialog.chat.id, message, tag)
                         count += 1
                     except Exception as e:
