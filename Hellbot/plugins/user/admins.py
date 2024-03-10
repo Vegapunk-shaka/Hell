@@ -284,11 +284,12 @@ async def unmute(client: Client, message: Message):
 )
 async def startmute(client: Client, message: Message):
     xx = await hellbot.delete(message,f"**Muting...**", 5)
-    if input_ := hellbot.pattern_match.group(1).strip():
-        try:
-            userid = await hellbot.client.parse_id(input_)
-        except Exception as x:
-            return await xx.edit(str(x))
+    if message.reply_to_message:
+        user = message.reply_to_message.from_user
+        if len(message.command) < 2:
+            reason = None
+        else:
+            reason = await hellbot.input(message)
     elif hellbot.reply_to_msg_id:
         reply = await hellbot.get_reply_message()
         userid = reply.sender_id
