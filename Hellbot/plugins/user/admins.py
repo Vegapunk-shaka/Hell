@@ -283,10 +283,10 @@ async def unmute(client: Client, message: Message):
     allow_stan=False,
 )
 async def startmute(client: Client, message: Message):
-    xx = await event.eor("`Muting...`")
-    if input_ := event.pattern_match.group(1).strip():
+    xx = await hellbot.eor("`Muting...`")
+    if input_ := hellbot.pattern_match.group(1).strip():
         try:
-            userid = await event.client.parse_id(input_)
+            userid = await hellbot.client.parse_id(input_)
         except Exception as x:
             return await xx.edit(str(x))
     elif event.reply_to_msg_id:
