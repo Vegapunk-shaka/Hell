@@ -276,40 +276,6 @@ async def unmute(client: Client, message: Message):
         f"**Unmuted User**\n\n**User:** {user.mention}\n**User ID:** `{user.id}`\n**Admin:** `{message.from_user.mention}`\n**Group:** `{message.chat.title}`\n**Group ID:** `{message.chat.id}`",
     )
 
-@on_message(
-    "dmute",
-    chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
-)
-async def startmute(client: Client, message: Message):
-    xx = await hellbot.delete(message,f"**Muting...**", 5)
-    if message.reply_to_message:
-        user = message.reply_to_message.from_user
-        if len(message.command) < 2:
-            reason = None
-        else:
-            reason = await hellbot.input(message)
-    elif hellbot.reply_to_msg_id:
-        reply = await hellbot.get_reply_message()
-        userid = reply.sender_id
-        if reply.out or userid in [hellbot.me.id, asst.me.id]:
-            return await hellbot.delete(message,f"**You cannot mute yourself or your assistant bot.**", 30)
-    elif hellbot.is_private:
-        userid = hellbot.chat_id
-    else:
-        return await hellbot.delete(message,f"**Reply to a user or add their userid.**", 5)
-    chat = await hellbot.get_chat()
-    if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
-        if not chat.admin_rights.delete_messages:
-            return await hellbot.delete(message,f"**No proper admin rights...**", 5)
-    elif "creator" not in vars(chat) and not hellbot.is_private:
-        return await hellbot.delete(message,f"**No proper admin rights...**", 5)
-    if is_muted(hellbot.chat_id, userid):
-        return await hellbot.delete(message,f"**This user is already muted in this chat.**", 5)
-    mute(hellbot.chat_id, userid)
-    await hellbot.delete(message,f"**Successfully muted...**", 3)
-
 
 @on_message(
     "pin",
