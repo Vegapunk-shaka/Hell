@@ -301,13 +301,13 @@ async def startmute(client: Client, message: Message):
     chat = await hellbot.get_chat()
     if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
         if not chat.admin_rights.delete_messages:
-            return await hellbot.(message,f"**No proper admin rights...**", 5)
+            return await hellbot.delete(message,f"**No proper admin rights...**", 5)
     elif "creator" not in vars(chat) and not hellbot.is_private:
-        return await hellbot.(message,f"**No proper admin rights...**", 5)
+        return await hellbot.delete(message,f"**No proper admin rights...**", 5)
     if is_muted(hellbot.chat_id, userid):
-        return await hellbot.(message,f"**This user is already muted in this chat.**", 5)
+        return await hellbot.delete(message,f"**This user is already muted in this chat.**", 5)
     mute(hellbot.chat_id, userid)
-    await hellbot.(message,f"**Successfully muted...**", 3)
+    await hellbot.delete(message,f"**Successfully muted...**", 3)
 
 
 @on_message(
