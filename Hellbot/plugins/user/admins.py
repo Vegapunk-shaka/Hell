@@ -283,7 +283,7 @@ async def unmute(client: Client, message: Message):
     allow_stan=False,
 )
 async def startmute(client: Client, message: Message):
-    xx = await hellbot.delete(message,f"**Muting...**", 30)
+    xx = await hellbot.delete(message,f"**Muting...**", 5)
     if input_ := hellbot.pattern_match.group(1).strip():
         try:
             userid = await hellbot.client.parse_id(input_)
@@ -297,17 +297,17 @@ async def startmute(client: Client, message: Message):
     elif hellbot.is_private:
         userid = hellbot.chat_id
     else:
-        return await hellbot.(message,f"**Reply to a user or add their userid.**", time=5)
+        return await hellbot.(message,f"**Reply to a user or add their userid.**", 5)
     chat = await hellbot.get_chat()
     if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
         if not chat.admin_rights.delete_messages:
-            return await hellbot.(message,f"**No proper admin rights...**", time=5)
+            return await hellbot.(message,f"**No proper admin rights...**", 5)
     elif "creator" not in vars(chat) and not hellbot.is_private:
-        return await hellbot.(message,f"**No proper admin rights...**", time=5)
+        return await hellbot.(message,f"**No proper admin rights...**", 5)
     if is_muted(hellbot.chat_id, userid):
-        return await hellbot.(message,f"**This user is already muted in this chat.**", time=5)
+        return await hellbot.(message,f"**This user is already muted in this chat.**", 5)
     mute(hellbot.chat_id, userid)
-    await hellbot.(message,f"**Successfully muted...**", time=3)
+    await hellbot.(message,f"**Successfully muted...**", 3)
 
 
 @on_message(
