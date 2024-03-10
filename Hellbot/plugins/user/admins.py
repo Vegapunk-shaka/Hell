@@ -297,7 +297,7 @@ async def startmute(client: Client, message: Message):
     elif hellbot.is_private:
         userid = hellbot.chat_id
     else:
-        return await hellbot.(message,f"**Reply to a user or add their userid.**", 5)
+        return await hellbot.delete(message,f"**Reply to a user or add their userid.**", 5)
     chat = await hellbot.get_chat()
     if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
         if not chat.admin_rights.delete_messages:
