@@ -82,12 +82,11 @@ async def allfilters(client: Client, message: Message):
 
 @custom_handler(filters.incoming & ~filters.service)
 async def handle_filters(client: Client, message: Message):
-    if len(message.command) < 2 and not message.reply_to_message:
     data = await db.get_all_filters(client.me.id, message.chat.id)
     if not data:
         return
 
-    msg = message.text or message.caption
+    msg = message.reply_to_message.text or message.caption
     if not msg:
         return
 
