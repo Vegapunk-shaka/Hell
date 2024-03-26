@@ -86,7 +86,7 @@ async def handle_filters(client: Client, message: Message):
     if not data:
         return
 
-    msg = message.reply_to_message.text or message.caption
+    msg = message.text or message.caption
     if not msg:
         return
 
