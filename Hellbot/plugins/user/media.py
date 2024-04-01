@@ -67,8 +67,8 @@ async def mediaInfo(_, message: Message):
 
     await hell.edit(f"Uploading mediainfo to telegraph...")
 
-    to_paste = f"<h1>💫 RinBot Media Info:</h1><br>{metadata}<br><b>📝 MediaInfo:</b><br><code>{out}</code>"
-    link = post_to_telegraph("HellBotMediaInfo", to_paste)
+    to_paste = f"<strong>💫 RinBot Media Info:</strong><br>{metadata}<br><b>📝 MediaInfo:</b><br><code>{out}</code>"
+    link = post_to_telegraph("RinBotMediaInfo", to_paste)
 
     await hell.edit(f"**📌 Media Info:** [Here]({link})", disable_web_page_preview=False)
     os.remove(file_path)
@@ -248,7 +248,7 @@ HelpMenu("media").add(
     "rename",
     "<reply to media message> <new file name>",
     "Rename a media file with the provided name.",
-    "rename RinBot.jpg",
+    "rename HellBot.jpg",
     "The file name must have an extention.",
 ).add(
     "setthumbnail",
