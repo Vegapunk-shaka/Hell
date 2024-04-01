@@ -21,8 +21,8 @@ class Config:
     HEROKU_APIKEY = getenv("HEROKU_APIKEY", None)
 
     # github related configs
-    PLUGINS_REPO = getenv("PLUGINS_REPO", "The-HellBot/Plugins")
-    DEPLOY_REPO = getenv("DEPLOY_REPO", "The-HellBot/Hellbot")
+    PLUGINS_REPO = getenv("PLUGINS_REPO", "Chowdhury-Siam/RinBot-Plugins")
+    DEPLOY_REPO = getenv("DEPLOY_REPO", "Chowdhury-Siam/RinBot")
 
     # storage dir: you may or may not edit
     DWL_DIR = "./downloads/"
@@ -34,8 +34,9 @@ class Config:
     # users config: do not edit
     AUTH_USERS = filters.user()
     BANNED_USERS = filters.user()
+    GACHA_BOTS = filters.user()
     MUTED_USERS = filters.user()
-    DEVS = filters.user([1432756163, 1874070588, 1533682758])
+    DEVS = filters.user([5971676967, 6941649360])
     STAN_USERS = filters.user()
     FORCESUBS = filters.chat()
 
