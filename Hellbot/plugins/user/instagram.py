@@ -12,7 +12,7 @@ from Hellbot.functions.driver import Driver
 from Hellbot import LOGS
 
 from . import HelpMenu, hellbot, on_message
-=
+
 
 def obtain_ids(user: str):
     response = requests.get("https://www.instagram.com/" + user)
