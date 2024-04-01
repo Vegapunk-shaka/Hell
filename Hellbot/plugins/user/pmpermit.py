@@ -5,6 +5,7 @@ from pyrogram.enums import ChatType
 from pyrogram.types import Message
 
 from Hellbot.core import ENV
+
 from . import Config, HelpMenu, Symbols, custom_handler, db, hellbot, on_message
 
 blocked_messages = [
@@ -35,7 +36,7 @@ WARNS = {}
 PREV_MESSAGE = {}
 
 
-@on_message("b", allow_stan=False)
+@on_message(["b", "block"], allow_stan=False)
 async def block_user(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -67,7 +68,7 @@ async def block_user(client: Client, message: Message):
         await hellbot.error(message, f"`Couldn't block {user.mention}`")
 
 
-@on_message("unb", allow_stan=False)
+@on_message(["unb", "unblock]", allow_stan=False)
 async def unblock_user(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -94,7 +95,7 @@ async def unblock_user(client: Client, message: Message):
         await hellbot.error(message, f"`Couldn't unblock {user.mention}`")
 
 
-@on_message(["a", "approve"], allow_stan=False)
+@on_message(["a", "allow"], allow_stan=False)
 async def allow_pm(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -124,7 +125,7 @@ async def allow_pm(client: Client, message: Message):
     await hellbot.delete(message, f"**{Symbols.check_mark} Allowed:** {user_mention}")
 
 
-@on_message(["da", "disapprove"], allow_stan=False)
+@on_message(["da", "disallow"], allow_stan=False)
 async def disallow_pm(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -156,7 +157,7 @@ async def disallow_pm(client: Client, message: Message):
     )
 
 
-@on_message(["alist", "approvelist"], allow_stan=False)
+@on_message(["alist", "allowlist"], allow_stan=False)
 async def allowlist(client: Client, message: Message):
     hell = await hellbot.edit(message, "`Fetching allowlist...`")
     users = await db.get_all_pmpermits(client.me.id)
@@ -170,16 +171,19 @@ async def allowlist(client: Client, message: Message):
             text += f"    {Symbols.anchor} {name} (`{user['user']}`) | {user['date']}\n"
         except:
             text += f"    {Symbols.anchor} Unkown Peer (`{user['user']}`) | {user['date']}\n"
-            
+
     await hell.edit(text)
 
 
-@on_message("pm", allow_stan=False)
+@on_message(["pm", "pmpermit"], allow_stan=False)
 async def set_pmpermit(_, message: Message):
     if len(message.command) < 2:
         status = await db.get_env(ENV.pmpermit)
         text = "Enabled" if status else "Disabled"
-        return await hellbot.delete(message, f"**Current PM Permit Setting:** `{text}`\n\nTo change the setting give either `on` or `off` as argument.")
+        return await hellbot.delete(
+            message,
+            f"**Current PM Permit Setting:** `{text}`\n\nTo change the setting give either `on` or `off` as argument.",
+        )
 
     cmd = message.command[1].lower().strip()
 
@@ -191,6 +195,22 @@ async def set_pmpermit(_, message: Message):
         await hellbot.delete(message, "**PM Permit Disabled!**")
     else:
         await hellbot.delete(message, "**Invalid Argument!**")
+
+
+@custom_handler(filters.outgoing & filters.private)
+async def handler_outgoing_pm(client: Client, message: Message):
+    if message.chat.id == 777000:
+        return
+
+    if not await db.get_env(ENV.pmpermit):
+        return
+
+    if not await db.is_pmpermit(client.me.id, message.chat.id):
+        await db.add_pmpermit(client.me.id, message.chat.id)
+        await hellbot.delete(
+            message,
+            f"**{Symbols.check_mark} Auto-Approved Outgoing PM:** {message.chat.first_name}",
+        )
 
 
 @custom_handler(filters.incoming & filters.private & ~filters.bot & ~filters.service)
@@ -266,29 +286,29 @@ async def handle_incoming_pm(client: Client, message: Message):
 
 
 HelpMenu("pmpermit").add(
-    "b",
+    "block",
     "<reply to user>/<userid/username>",
     "Block a user from pm-ing you.",
     "block @ForGo10God",
 ).add(
-    "unb",
+    "unblock",
     "<reply to user>/<userid/username>",
     "Unblock a user from pm-ing you.",
     "unblock @ForGo10God",
 ).add(
-    "a",
+    "allow",
     "<reply to user>/<userid/username>",
     "Allow a user to pm you.",
     "allow @ForGo10God",
     "An alias of 'approve' is also available.",
 ).add(
-    "da",
+    "disallow",
     "<reply to user>/<userid/username>",
     "Disallow a user to pm you.",
     "disallow @ForGo10God",
     "An alias of 'disapprove' is also available.",
 ).add(
-    "alist",
+    "allowlist",
     None,
     "List all users allowed to pm you.",
     "allowlist",
