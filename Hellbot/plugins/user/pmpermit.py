@@ -36,7 +36,7 @@ WARNS = {}
 PREV_MESSAGE = {}
 
 
-@on_message(["b", "block"], allow_stan=False)
+@on_message("b", allow_stan=False)
 async def block_user(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -68,7 +68,7 @@ async def block_user(client: Client, message: Message):
         await hellbot.error(message, f"`Couldn't block {user.mention}`")
 
 
-@on_message(["unb", "unblock]", allow_stan=False)
+@on_message("unb", allow_stan=False)
 async def unblock_user(client: Client, message: Message):
     if len(message.command) > 1:
         try:
@@ -175,7 +175,7 @@ async def allowlist(client: Client, message: Message):
     await hell.edit(text)
 
 
-@on_message(["pm", "pmpermit"], allow_stan=False)
+@on_message("pm", allow_stan=False)
 async def set_pmpermit(_, message: Message):
     if len(message.command) < 2:
         status = await db.get_env(ENV.pmpermit)
