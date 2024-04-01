@@ -11,8 +11,8 @@ from . import HelpMenu, group_only, handler, hellbot, on_message
 @on_message(
     "promote",
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def promote(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
@@ -30,13 +30,13 @@ async def promote(client: Client, message: Message):
     try:
         privileges = ChatPrivileges(
             can_manage_chat=True,
-            can_delete_messages=False,
-            can_manage_video_chats=False,
+            can_delete_messages=True,
+            can_manage_video_chats=True,
             can_restrict_members=False,
             can_promote_members=False,
             can_change_info=False,
             can_invite_users=True,
-            can_pin_messages=False,
+            can_pin_messages=True,
             is_anonymous=False,
         )
         await message.chat.promote_member(user.id, privileges)
@@ -54,8 +54,8 @@ async def promote(client: Client, message: Message):
 @on_message(
     "demote",
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def demote(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
@@ -91,10 +91,10 @@ async def demote(client: Client, message: Message):
 
 
 @on_message(
-    "ban",
+    ["ban", "dban"],
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def ban(client: Client, message: Message):
     if message.reply_to_message:
@@ -103,6 +103,8 @@ async def ban(client: Client, message: Message):
             reason = None
         else:
             reason = await hellbot.input(message)
+        if message.command[0][0].lower() == "d":
+            await message.reply_to_message.delete()
     elif len(message.command) == 2:
         user = await client.get_users(message.command[1])
         reason = None
@@ -134,8 +136,8 @@ async def ban(client: Client, message: Message):
 @on_message(
     "unban",
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def unban(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
@@ -161,10 +163,10 @@ async def unban(client: Client, message: Message):
 
 
 @on_message(
-    "kick",
+    ["kick", "dkick"],
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def kick(client: Client, message: Message):
     if message.reply_to_message:
@@ -173,6 +175,8 @@ async def kick(client: Client, message: Message):
             reason = None
         else:
             reason = await hellbot.input(message)
+        if message.command[0][0].lower() == "d":
+            await message.reply_to_message.delete()
     elif len(message.command) == 2:
         user = await client.get_users(message.command[1])
         reason = None
@@ -204,10 +208,10 @@ async def kick(client: Client, message: Message):
 
 
 @on_message(
-    "mute",
+    ["mute", "dmute"],
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def mute(client: Client, message: Message):
     if message.reply_to_message:
@@ -216,6 +220,8 @@ async def mute(client: Client, message: Message):
             reason = None
         else:
             reason = await hellbot.input(message)
+        if message.command[0][0].lower() == "d":
+            await message.reply_to_message.delete()
     elif len(message.command) == 2:
         user = await client.get_users(message.command[1])
         reason = None
@@ -248,8 +254,8 @@ async def mute(client: Client, message: Message):
 @on_message(
     "unmute",
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def unmute(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
@@ -280,8 +286,8 @@ async def unmute(client: Client, message: Message):
 @on_message(
     "pin",
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def pin(_, message: Message):
     if not message.reply_to_message:
@@ -306,8 +312,8 @@ async def pin(_, message: Message):
 @on_message(
     "unpin",
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def unpin(_, message: Message):
     if not message.reply_to_message:
@@ -332,8 +338,8 @@ async def unpin(_, message: Message):
 @on_message(
     "zombies",
     chat_type=group_only,
-    admin_only=False,
-    allow_stan=False,
+    admin_only=True,
+    allow_stan=True,
 )
 async def zombies(_, message: Message):
     hell = await hellbot.edit(message, "☠️ Detecting zombies...")
@@ -369,19 +375,19 @@ async def zombies(_, message: Message):
 
 
 HelpMenu("admin").add(
-    "promote", "<username/id/reply> <title>", "Promote a user to admin.", "promote @"
+    "promote", "<username/id/reply> <title>", "Promote a user to admin.", "promote @ForGo10God hellboy"
 ).add(
-    "demote", "<username/id/reply>", "Demote a user from admin.", "demote @"
+    "demote", "<username/id/reply>", "Demote a user from admin.", "demote @ForGo10God"
 ).add(
-    "ban", "<username/id/reply> <reason>", "Ban a user from the group.", "ban @"
+    "ban", "<username/id/reply> <reason>", "Ban a user from the group.", "ban @ForGo10God", "You can also use dban to delete the message of the user."
 ).add(
-    "unban", "<username/id/reply>", "Unban a user from the group.", "unban @"
+    "unban", "<username/id/reply>", "Unban a user from the group.", "unban @ForGo10God"
 ).add(
-    "kick", "<username/id/reply> <reason>", "Kick a user from the group.", "kick @"
+    "kick", "<username/id/reply> <reason>", "Kick a user from the group.", "kick @ForGo10God", "You can also use dkick to delete the message of the user."
 ).add(
-    "mute", "<username/id/reply> <reason>", "Mute a user in the group", "mute @"
+    "mute", "<username/id/reply> <reason>", "Mute a user in the group", "mute @ForGo10God", "You can also use dmute to delete the message of the user."
 ).add(
-    "unmute", "<username/id/reply>", "Unmute a user in the group.", "unmute @"
+    "unmute", "<username/id/reply>", "Unmute a user in the group.", "unmute @ForGo10God"
 ).add(
     "pin", "<reply>", "Pin the replied message in the group."
 ).add(
@@ -389,4 +395,3 @@ HelpMenu("admin").add(
 ).add(
     "zombies", "clean", "Finds the total number of deleted users present in that group and ban them."
 ).info("Admin Menu").done()
-    
