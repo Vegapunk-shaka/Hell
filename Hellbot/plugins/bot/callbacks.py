@@ -79,7 +79,7 @@ async def bot_help_cmd_cb(_, cb: CallbackQuery):
     result += (
         f"\n\n**{Symbols.arrow_right} Description:** __{cmd_dict['description']}__"
     )
-    result += f"\n\n**<\> @Chowdhury_Siam 🍀**"
+    result += f"\n\n**<\\> @Chowdhury_Siam 🍀**"
 
     buttons = [
         [
@@ -189,7 +189,7 @@ async def help_cmd_cb(_, cb: CallbackQuery):
     if cmd_dict["note"]:
         result += f"\n\n**{Symbols.arrow_right} Note:** __{cmd_dict['note']}__"
 
-    result += f"\n\n**<\> @Chowdhury_Siam 🍀**"
+    result += f"\n\n**<\\> @Chowdhury_Siam 🍀**"
 
     buttons = [
         [
