@@ -11,8 +11,8 @@ from . import HelpMenu, custom_handler, db, group_only, handler, hellbot, on_mes
 @on_message(
     "promote",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def promote(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
@@ -54,8 +54,8 @@ async def promote(client: Client, message: Message):
 @on_message(
     "demote",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def demote(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
@@ -93,8 +93,8 @@ async def demote(client: Client, message: Message):
 @on_message(
     ["ban", "dban"],
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def ban(client: Client, message: Message):
     if message.reply_to_message:
@@ -136,8 +136,8 @@ async def ban(client: Client, message: Message):
 @on_message(
     "unban",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def unban(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
@@ -165,8 +165,8 @@ async def unban(client: Client, message: Message):
 @on_message(
     ["kick", "dkick"],
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def kick(client: Client, message: Message):
     if message.reply_to_message:
@@ -210,8 +210,8 @@ async def kick(client: Client, message: Message):
 @on_message(
     "mute",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def mute(client: Client, message: Message):
     if message.reply_to_message:
@@ -254,8 +254,8 @@ async def mute(client: Client, message: Message):
 @on_message(
     "unmute",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def unmute(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
@@ -283,7 +283,7 @@ async def unmute(client: Client, message: Message):
     )
 
 
-@on_message("dmute", allow_stan=True)
+@on_message("dmute", allow_stan=False)
 async def dmute(client: Client, message: Message):
     if message.reply_to_message:
         user = message.reply_to_message.from_user
@@ -318,7 +318,7 @@ async def dmute(client: Client, message: Message):
     )
 
 
-@on_message("undmute", allow_stan=True)
+@on_message("undmute", allow_stan=False)
 async def undmute(client: Client, message: Message):
     if len(message.command) < 2 and not message.reply_to_message:
         return await hellbot.delete(
@@ -348,8 +348,8 @@ async def undmute(client: Client, message: Message):
 @on_message(
     "pin",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def pin(_, message: Message):
     if not message.reply_to_message:
@@ -374,8 +374,8 @@ async def pin(_, message: Message):
 @on_message(
     "unpin",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def unpin(_, message: Message):
     if not message.reply_to_message:
@@ -400,8 +400,8 @@ async def unpin(_, message: Message):
 @on_message(
     "zombies",
     chat_type=group_only,
-    admin_only=True,
-    allow_stan=True,
+    admin_only=False,
+    allow_stan=False,
 )
 async def zombies(_, message: Message):
     hell = await hellbot.edit(message, "☠️ Detecting zombies...")
