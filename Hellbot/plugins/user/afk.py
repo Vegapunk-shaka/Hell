@@ -22,7 +22,6 @@ afk_quotes = [
     "🌈 Away from the screen, catching a breath.",
     "💤 Offline for a moment, but still here in spirit.",
     "🚀 Exploring the real world, back in a moment!",
-    "🍵 Taking a tea break, back shortly!",
     "🌙 Resting my keyboard, back after a short nap.",
     "🚶‍♀️ Stepping away for a moment of peace.",
     "🎵 AFK but humming along, back shortly!",
@@ -61,8 +60,10 @@ async def afk(_, message: Message):
     reason = await hellbot.input(message)
     reason = reason if reason else "Not specified"
 
+    await db.set_afk(
+        message.from_user.id, reason, media.id if media else None, media_type
+    )
     await hellbot.delete(message, "🫡 Going AFK! See ya'll later.")
-    await db.set_afk(message.from_user.id, reason, media.id, media_type)
     await hellbot.check_and_log(
         "afk",
         f"Going AFK! \n\n**Reason:** `{reason}`",
