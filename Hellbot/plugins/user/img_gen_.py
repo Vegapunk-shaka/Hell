@@ -2,7 +2,6 @@ import requests
 import time
 import os
 from pyrogram import filters
-from REPO import app
 
 
 @on_message("gen", allow_stan=True)
