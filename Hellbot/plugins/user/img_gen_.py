@@ -2,16 +2,17 @@ import requests
 import time
 import os
 from pyrogram import filters
-from . import Config, HelpMenu, db, hellbot, on_message
+from . import HelpMenu, hellbot, on_message
 
 
 @on_message("gen", allow_stan=True)
 async def generate_image(client, message):
-    # Get the prompt from the command
+   
     prompt = ' '.join(message.command[1:])
 
-    # Send a message to inform the user to wait
-    wait_message = await message.reply_text("Please wait while I generate the image...")
+    to_send = []
+    limit = 10
+    hell = await hellbot.edit(message, "Processing...")
     StartTime = time.time()
 
 
@@ -53,3 +54,12 @@ async def generate_image(client, message):
             await wait_message.edit_text("Error: {}".format(e))
     else:
         await wait_message.edit_text("Error: {}".format(response.status_code))
+
+    HelpMenu("ai").add(
+    "gen",
+    "<query>",
+    "Generate Ai image from https://ai-api.magicstudio.com,",
+    "gen Miku Nakano",
+).info(
+    "Image Tools"
+).done()
