@@ -6,7 +6,7 @@ from . import HelpMenu, hellbot, on_message
 
 
 @on_message("gen", allow_stan=True)
-async def generate_image(client, message):
+async def generate_image(_, message: Message):
    
     prompt = ' '.join(message.command[1:])
 
@@ -53,10 +53,10 @@ async def generate_image(client, message):
     else:
         await text.edit_text("Error: {}".format(response.status_code))
 
-    HelpMenu("ai").add(
+    HelpMenu("image Generator").add(
     "gen",
     "<query>",
-    "Generate Ai image from https://ai-api.magicstudio.com,",
+    "To Create Ai Generated Image,",
     "gen Miku Nakano",
 ).info(
     "Image Tools"
