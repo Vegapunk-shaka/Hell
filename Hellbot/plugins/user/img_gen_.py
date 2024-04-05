@@ -1,18 +1,11 @@
-# Credits: 
-# @MyselfShuyaa
-# @Not_Coding
-# @SIAmKira
-# @botsupportx
-
-
 import requests
 import time
 import os
 from pyrogram import filters
 from REPO import app
 
-# Command handler for /generate
-@app.on_message(filters.command('generate'))
+
+@on_message("gen", allow_stan=True)
 async def generate_image(client, message):
     # Get the prompt from the command
     prompt = ' '.join(message.command[1:])
