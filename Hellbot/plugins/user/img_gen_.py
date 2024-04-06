@@ -1,8 +1,11 @@
+#Coded By @Chowdhury_Siam
+
 import requests
 import time
 import os
 from pyrogram import filters
 from . import HelpMenu, hellbot, on_message
+from pyrogram.types import Message
 
 
 @on_message("gen", allow_stan=True)
