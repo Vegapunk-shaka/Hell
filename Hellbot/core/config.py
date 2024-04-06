@@ -21,14 +21,14 @@ class Config:
     HEROKU_APIKEY = getenv("HEROKU_APIKEY", None)
 
     # github related configs
-    PLUGINS_REPO = getenv("PLUGINS_REPO", "Chowdhury-Siam/RinBot-Plugins")
-    DEPLOY_REPO = getenv("DEPLOY_REPO", "Chowdhury-Siam/RinBot")
+    PLUGINS_REPO = getenv("PLUGINS_REPO", "The-HellBot/Plugins")
+    DEPLOY_REPO = getenv("DEPLOY_REPO", "The-HellBot/Hellbot")
 
     # storage dir: you may or may not edit
     DWL_DIR = "./downloads/"
     TEMP_DIR = "./temp/"
-    CHROME_BIN = getenv("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
-    CHROME_DRIVER = getenv("CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver")
+    CHROME_BIN = getenv("CHROME_BIN", "/app/.chrome-for-testing/chrome-linux64/chrome")
+    CHROME_DRIVER = getenv("CHROME_DRIVER", "/app/.chrome-for-testing/chromedriver-linux64/chromedriver")
     FONT_PATH = "./Hellbot/resources/fonts/Montserrat.ttf"
 
     # users config: do not edit
@@ -36,7 +36,7 @@ class Config:
     BANNED_USERS = filters.user()
     GACHA_BOTS = filters.user()
     MUTED_USERS = filters.user()
-    DEVS = filters.user([5971676967, 6941649360])
+    DEVS = filters.user([1432756163, 1874070588, 1533682758])
     STAN_USERS = filters.user()
     FORCESUBS = filters.chat()
 
@@ -151,4 +151,4 @@ os_configs = [
 ]
 all_env: list[str] = [
     value for key, value in ENV.__dict__.items() if not key.startswith("__")
-    ]
+]
