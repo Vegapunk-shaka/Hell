@@ -44,7 +44,7 @@ async def blacklists(client: Client, message: Message):
     if not blacklists:
         return await hellbot.delete(message, "No blacklists found.")
 
-    text = f"**{Symbols.bullet} 𝖡𝗅𝖺𝖼𝗄𝗅𝗂𝗌𝗍𝗌 𝗂𝗇 {message.chat.title}:**\n\n"
+    text = f"**{Symbols.bullet} Blacklists in {message.chat.title}:**\n\n"
     for i in blacklists:
         text += f"    {Symbols.anchor} `{i}`\n"
 
@@ -53,17 +53,15 @@ async def blacklists(client: Client, message: Message):
 
 @custom_handler(filters.text & filters.incoming & ~Config.AUTH_USERS & ~filters.service)
 async def handle_blacklists(client: Client, message: Message):
-    if not BList.check_client_chat(client.me.id, message.chat.id):
-        return
-
-    blacklists = BList.getBlacklists(client.me.id, message.chat.id)
-    for blacklist in blacklists:
-        pattern = r"( |^|[^\w])" + re.escape(blacklist) + r"( |$|[^\w])"
-        if re.search(pattern, message.text, flags=re.IGNORECASE):
-            try:
-                await message.delete()
-            except Exception:
-                await BList.rmBlacklist(client.me.id, message.chat.id, blacklist)
+    if BList.check_client_chat(client.me.id, message.chat.id):
+        blacklists = BList.getBlacklists(client.me.id, message.chat.id)
+        for blacklist in blacklists:
+            pattern = r"( |^|[^\w])" + re.escape(blacklist) + r"( |$|[^\w])"
+            if re.search(pattern, message.text, flags=re.IGNORECASE):
+                try:
+                    await message.delete()
+                except Exception:
+                    await BList.rmBlacklist(client.me.id, message.chat.id, blacklist)
 
 
 HelpMenu("blacklist").add(
