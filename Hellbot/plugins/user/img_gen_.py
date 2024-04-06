@@ -10,6 +10,7 @@ from pyrogram.types import Message
 
 @on_message("gen", allow_stan=True)
 async def generate_image(_, message: Message):
+   if len(message.command) < 2:
    
     prompt = ' '.join(message.command[1:])
 
