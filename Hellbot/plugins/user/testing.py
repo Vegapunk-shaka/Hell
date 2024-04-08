@@ -3,13 +3,12 @@ from PIL import Image
 import requests
 from io import BytesIO
 from . import HelpMenu, hellbot, on_message
-# Ensure 'app' object is imported directly or from the correct module
+
 from Hellbot.core.clients import app
 
-# Alternatively, if 'app' is defined in the '__init__.py' file of the 'Hellbot' package
+from . import app
 from Hellbot import app
 
-# Update your import statement accordingly based on the location of the 'app' object
 
 @on_message("ups", allow_stan=True)
 def upscale_image(client, message):
