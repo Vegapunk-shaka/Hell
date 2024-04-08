@@ -28,5 +28,3 @@ def upscale_image(client, message):
     output.seek(0)
 
     client.send_photo(chat_id, photo=output)
-
-app.run()
