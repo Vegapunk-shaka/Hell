@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from PIL import Image
 import requests
 from io import BytesIO
-from . import HelpMenu, hellbot, on_message
+from . import HelpMenu, hellbot, on_message, app
 
 @on_message("ups", allow_stan=True)
 def upscale_image(client, message):
