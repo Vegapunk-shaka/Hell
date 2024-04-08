@@ -4,11 +4,6 @@ import requests
 from io import BytesIO
 from . import HelpMenu, hellbot, on_message
 
-from Hellbot.core.clients import app
-
-from . import app
-from Hellbot import app
-
 
 @on_message("ups", allow_stan=True)
 def upscale_image(client, message):
