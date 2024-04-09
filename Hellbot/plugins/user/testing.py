@@ -3,6 +3,9 @@ from PIL import Image
 import requests
 from io import BytesIO
 import os
+from . import HelpMenu, hellbot, on_message
+from pyrogram.types import Message
+
 
 # Initialize the Pyrogram Client
 app = Client("my_image_upscale_bot")
