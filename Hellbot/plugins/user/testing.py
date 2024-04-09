@@ -2,7 +2,6 @@ from pyrogram import Client, filters
 from PIL import Image
 import requests
 from io import BytesIO
-import os
 from pyrogram.types import Message
 from . import HelpMenu, hellbot, on_message
 
@@ -12,11 +11,11 @@ API_HASH = "07225d0de9bee70666517315d2174171"  # Your API Hash
 # Initialize the Pyrogram Client
 app = Client("my_image_upscale_bot", api_id=API_ID, api_hash=API_HASH)
 
-@app.on_message("ups", allow_stan=False)
+@app.on_message(filters.command("upscale", prefixes="/"))
 async def upscale_command(client: Client, message: Message):
     await upscale_image(client, message)
     if not message.reply_to_message:
-        return await hellbot.delete(
+        return await hellbot.delete()
     
 # Function to upscale the image
 async def upscale_image(client, message):
