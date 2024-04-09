@@ -11,7 +11,7 @@ API_HASH = "07225d0de9bee70666517315d2174171"  # Your API Hash
 # Initialize the Pyrogram Client
 app = Client("my_image_upscale_bot", api_id=API_ID, api_hash=API_HASH)
 
-@app.on_message(filters.command("upscale", prefixes="/"))
+@app.on_message(filters.command("upscale", prefixes="."))
 async def upscale_command(client: Client, message: Message):
     await upscale_image(client, message)
     if not message.reply_to_message:
