@@ -10,6 +10,11 @@ API_HASH = "07225d0de9bee70666517315d2174171"  # Your API Hash
 # Initialize the Pyrogram Client
 app = Client("my_image_upscale_bot", api_id=API_ID, api_hash=API_HASH)
 
+# Registering the upscale_image function as a message handler
+@app.on_message(filters.command("upscale", prefixes="/"))
+async def upscale_command(client, message):
+    await upscale_image(client, message)
+    
 # Function to upscale the image
 async def upscale_image(client, message):
     chat_id = message.chat.id
@@ -33,11 +38,6 @@ async def upscale_image(client, message):
     output.seek(0)
 
     await client.send_photo(chat_id, photo=output)
-
-# Registering the upscale_image function as a message handler
-@app.on_message(filters.command("upscale", prefixes="/"))
-async def upscale_command(client, message):
-    await upscale_image(client, message)
 
 # Start the bot
 if __name__ == '__main__':
