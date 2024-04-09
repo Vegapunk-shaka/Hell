@@ -35,9 +35,9 @@ def upscale_image(client, message):
     client.send_photo(chat_id, photo=output)
 
 # Registering the upscale_image function as a message handler
-@app.on_message("ups", allow_stan=True)
+@app.on_message("ups")
 async def upscale_command(client, message):
     await upscale_image(client, message)
-
+    
 # Start the bot
 app.run()
