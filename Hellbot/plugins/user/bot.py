@@ -76,7 +76,7 @@ async def ping(client: Client, message: Message):
     await hellbot.edit(hell, caption, no_link_preview=True)
 
 
-@on_message("history", allow_stan=True)
+@on_message("h", allow_stan=False)
 async def history(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -112,7 +112,7 @@ async def history(client: Client, message: Message):
     await hellbot.edit(hell, response.text)
 
 
-@on_message("template", allow_stan=True)
+@on_message("template", allow_stan=False)
 async def template_example(_, message: Message):
     variable_names = list(Config.TEMPLATES.keys())
     if len(message.command) < 2:
@@ -148,7 +148,7 @@ HelpMenu("bot").add(
     "ping",
     "You can also customize ping message by adding a media to it.",
 ).add(
-    "history",
+    "h",
     "<reply to user>/<username/id>",
     "Get the username, name history of an user.",
     "history @ForGo10_God",
