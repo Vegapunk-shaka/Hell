@@ -76,7 +76,7 @@ async def ping(client: Client, message: Message):
     await hellbot.edit(hell, caption, no_link_preview=True)
 
 
-@on_message("h", allow_stan=False)
+@on_message("history", allow_stan=True)
 async def history(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -112,6 +112,29 @@ async def history(client: Client, message: Message):
     await hellbot.edit(hell, response.text)
 
 
+@on_message("template", allow_stan=True)
+async def template_example(_, message: Message):
+    variable_names = list(Config.TEMPLATES.keys())
+    if len(message.command) < 2:
+        return await hellbot.delete(
+            message,
+            f"__Give a template name to get template example.__\n\n**Available Templates:**\n`{'`,    `'.join(variable_names)}`",
+            30,
+        )
+
+    if message.command[1].upper() not in variable_names:
+        return await hellbot.delete(
+            message,
+            f"__Invalid template name:__ `{message.command[1].upper()}`\n\n**Available Templates:**\n`{'`,    `'.join(variable_names)}`",
+            30,
+        )
+
+    await hellbot.edit(
+        message,
+        f"**{message.command[1].upper()} Template Example:**\n\n```{Config.TEMPLATES[message.command[1].upper()]}```"
+    )
+
+
 HelpMenu("bot").add(
     "alive",
     None,
@@ -128,8 +151,14 @@ HelpMenu("bot").add(
     "history",
     "<reply to user>/<username/id>",
     "Get the username, name history of an user.",
-    "history",
+    "history @ForGo10_God",
     "This command uses SangMata Bot to get the history.",
+).add(
+    "template",
+    "<template name>",
+    "Get the example of a template.",
+    "template alive_templates",
+    "This command is used to get the example of a template and a list of customisable templates.",
 ).info(
     "Alive Menu"
 ).done()
