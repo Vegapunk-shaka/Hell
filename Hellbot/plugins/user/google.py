@@ -18,12 +18,11 @@ from pyrogram.types import InputMediaPhoto, Message
 from wikipedia import exceptions, summary
 
 from Hellbot.functions.driver import Driver
-from Hellbot.functions.google import googleimagesdownload
+from Hellbot.functions.images import download_images
 from Hellbot.functions.paste import post_to_telegraph
 from Hellbot.functions.scraping import is_valid_url
 
 from . import Config, HelpMenu, Symbols, db, handler, hellbot, on_message
-
 
 imdb = Cinemagoer()
 mov_titles = [
@@ -163,26 +162,19 @@ async def reverseSearch(_, message: Message):
     else:
         return await hell.edit("No results found.")
 
-
-    googleImage = googleimagesdownload()
-    to_send = []
-    args = {
-        "keywords": text,
-        "limit": 3,
-        "format": "jpg",
-        "output_directory": Config.DWL_DIR,
-    }
-
-    path_args, _ = googleImage.download(args)
-    images = path_args.get(text)
-    for image in images:
-        to_send.append(InputMediaPhoto(image))
-
-    if to_send:
-        await hell.reply_media_group(to_send)
-
     try:
-        rmtree(Config.DWL_DIR + text + "/")
+        to_send = []
+        images = await download_images(text, 3)
+
+        for image in images:
+            to_send.append(InputMediaPhoto(image))
+        if to_send:
+            await hell.reply_media_group(to_send)
+
+        try:
+            rmtree("./images")
+        except:
+            pass
     except:
         pass
 
@@ -376,9 +368,9 @@ async def textToSpeech(_, message: Message):
         comm = Communicate(
             text,
             "en-IN-NeerjaExpressiveNeural",
-            rate="+14%",
-            volume="+60%",
-            pitch="+4Hz",
+            rate="+10%",
+            volume="+50%",
+            pitch="+5Hz",
         )
         path = f"{Config.DWL_DIR}tts{int(time.time())}.mp3"
         await comm.save(path)
@@ -386,8 +378,8 @@ async def textToSpeech(_, message: Message):
         await message.reply_audio(
             path,
             caption=f"**🔊 Voice:** `{text[:100]}...`",
-            performer="RinTohsakaAi",
-            title="Rinbot TTS",
+            performer="HellyAI",
+            title="Hellbot TTS",
             thumb="./Hellbot/resources/images/hellbot_logo.png",
         )
         await hell.delete()
@@ -519,10 +511,10 @@ HelpMenu("google").add(
     "voice",
     "<text/reply to message>",
     "Sends the text as a voice message.",
-    "voice I'm Rinbot and this is an Text to Speech Example.",
+    "voice I'm Helly and this is an Text to Speech Example.",
     "An alias of 'tts' can also be used.",
 ).add(
-    "movie", #Bugged: to-be-fixed
+    "movie",  # Bugged: to-be-fixed
     "<movie name>",
     "Sends the details of the given movie.",
     "movie the shawshak redemption",
