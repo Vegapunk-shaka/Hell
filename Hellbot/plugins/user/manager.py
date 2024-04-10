@@ -33,15 +33,15 @@ async def getvar(_, message: Message):
     if isinstance(value, str):
         await hellbot.edit(
             message,
-            f"{Symbols.anchor} **𝖵𝖺𝗋𝗂𝖺𝖻𝗅𝖾 𝖭𝖺𝗆𝖾:** `{varname.upper()}`\n{Symbols.anchor} **𝖵𝖺𝗅𝗎𝖾:** `{value}`",
+            f"{Symbols.anchor} **Variable Name:** `{varname.upper()}`\n{Symbols.anchor} **Value:** `{value}`",
         )
     elif value is None:
-        await hellbot.delete(message, f"**𝖵𝖺𝗋𝗂𝖺𝖻𝗅𝖾 {varname} 𝖽𝗈𝖾𝗌 𝗇𝗈𝗍 𝖾𝗑𝗂𝗌𝗍𝗌!**")
+        await hellbot.delete(message, f"**Variable {varname} does not exists!**")
 
 
-@on_message("getallvar", allow_stan=True)
+@on_message(["getallvar", "getallvars"], allow_stan=True)
 async def getallvar(_, message: Message):
-    text = "**📃 𝖫𝗂𝗌𝗍 𝗈𝖿 𝖺𝗅𝗅 𝗏𝖺𝗋𝗂𝖺𝖻𝗅𝖾 𝖺𝗋𝖾:**\n\n"
+    text = "**📃 List of all variable are:**\n\n"
     for env in all_env:
         text += f"   {Symbols.anchor} `{env}`\n"
 
@@ -55,12 +55,13 @@ async def getallvar(_, message: Message):
 async def setvar(_, message: Message):
     if len(message.command) < 3:
         return await hellbot.delete(
-            message, "**𝖦𝗂𝗏𝖾 𝗏𝖺𝗋𝗇𝖺𝗆𝖾 𝖺𝗇𝖽 𝗏𝖺𝗋-𝗏𝖺𝗅𝗎𝖾 𝖺𝗅𝗈𝗇𝗀 𝗐𝗂𝗍𝗁 𝗍𝗁𝖾 𝖼𝗈𝗆𝗆𝖺𝗇𝖽!**"
+            message, "**Give varname and var-value along with the command!**"
         )
 
     is_heroku = False
-    varname = message.command[1]
-    varvalue = " ".join(message.command[2:])
+    input_str = (await hellbot.input(message)).split(" ", 1)
+    varname = input_str[0]
+    varvalue = input_str[1]
 
     if varname.upper() in os_configs:
         if HEROKU_APP:
@@ -81,9 +82,9 @@ async def setvar(_, message: Message):
 
         await hellbot.edit(
             message,
-            f"**{Symbols.anchor} 𝖵𝖺𝗋𝗂𝖺𝖻𝗅𝖾:** `{varname.upper()}` \n\n"
-            f"**{Symbols.anchor} 𝖮𝗅𝖽 𝖵𝖺𝗅𝗎𝖾:** `{oldValue}` \n\n"
-            f"**{Symbols.anchor} 𝖭𝖾𝗐 𝖵𝖺𝗅𝗎𝖾:** `{varvalue}`\n\n"
+            f"**{Symbols.anchor} Variable:** `{varname.upper()}` \n\n"
+            f"**{Symbols.anchor} Old Value:** `{oldValue}` \n\n"
+            f"**{Symbols.anchor} New Value:** `{varvalue}`\n\n"
             "__Restarting to apply changes!__",
         )
 
@@ -96,16 +97,16 @@ async def setvar(_, message: Message):
     await db.set_env(varname.upper(), varvalue)
     await hellbot.delete(
         message,
-        f"**{Symbols.anchor} 𝖵𝖺𝗋𝗂𝖺𝖻𝗅𝖾:** `{varname.upper()}` \n\n"
-        f"**{Symbols.anchor} 𝖮𝗅𝖽 𝖵𝖺𝗅𝗎𝖾:** `{oldValue}` \n\n"
-        f"**{Symbols.anchor} 𝖭𝖾𝗐 𝖵𝖺𝗅𝗎𝖾:** `{varvalue}`",
+        f"**{Symbols.anchor} Variable:** `{varname.upper()}` \n\n"
+        f"**{Symbols.anchor} Old Value:** `{oldValue}` \n\n"
+        f"**{Symbols.anchor} New Value:** `{varvalue}`",
     )
 
 
 @on_message("delvar", allow_stan=True)
 async def delvar(_, message: Message):
     if len(message.command) < 2:
-        return await hellbot.delete(message, "**𝖦𝗂𝗏𝖾 𝗏𝖺𝗋𝗇𝖺𝗆𝖾 𝖺𝗅𝗈𝗇𝗀 𝗐𝗂𝗍𝗁 𝗍𝗁𝖾 𝖼𝗈𝗆𝗆𝖺𝗇𝖽!**")
+        return await hellbot.delete(message, "**Give varname along with the command!**")
 
     varname = message.command[1]
     if varname.upper() in os_configs:
@@ -116,11 +117,11 @@ async def delvar(_, message: Message):
     if await db.is_env(varname.upper()):
         await db.rm_env(varname.upper())
         await hellbot.delete(
-            message, f"**𝖵𝖺𝗋𝗂𝖺𝖻𝗅𝖾** `{varname.upper()}` **𝖽𝖾𝗅𝖾𝗍𝖾𝖽 𝗌𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅𝗅𝗒!**"
+            message, f"**Variable** `{varname.upper()}` **deleted successfully!**"
         )
         return
 
-    await hellbot.delete(message, "**𝖭𝗈 𝗌𝗎𝖼𝗁 𝗏𝖺𝗋𝗂𝖺𝖻𝗅𝖾 𝖿𝗈𝗎𝗇𝖽 𝗂𝗇 𝖽𝖺𝗍𝖺𝖻𝖺𝗌𝖾 𝗍𝗈 𝖽𝖾𝗅𝖾𝗍𝖾!**")
+    await hellbot.delete(message, "**No such variable found in database to delete!**")
 
 
 @on_message("usage", allow_stan=True)
@@ -227,7 +228,7 @@ async def getLogs(_, message: Message):
             link = spaceBin(logData)
             await message.reply_document(
                 "log.txt",
-                caption=f"**𝖫𝗂𝗇𝗄 𝗍𝗈 𝗅𝗈𝗀𝗌:** [click here]({link})",
+                caption=f"**Link to logs:** [click here]({link})",
                 file_name="log.txt",
             )
             os.remove("log.txt")
