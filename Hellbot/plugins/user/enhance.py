@@ -1,4 +1,5 @@
 from pyrogram import Client, filters
+from . import HelpMenu, hellbot, on_message
 import base64
 import hashlib
 import httpx
@@ -17,7 +18,7 @@ def _get_image_md5_content(file_path: str) -> tuple[str, bytes]:
         image_md5 = base64.b64encode(hashlib.md5(content).digest()).decode("utf-8")
     return image_md5, content
 
-@user.on_message(filters.command(["ups"]))
+@on_message("ups", allow_stan=True)
 async def enhance_command(client, message):
     if message.reply_to_message and message.reply_to_message.photo:
         photo = message.reply_to_message.photo[-1]
