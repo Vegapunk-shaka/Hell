@@ -6,7 +6,7 @@ import requests
 
 api_key = "VqhGPCcCL59BaNicWsgxTXH-kmwuVBMSdz0poqEZZXqgfr5Y"
 
-@Client.on_message("ups", allow_stan=True)
+@on_message("ups", allow_stan=True)
 async def enhance_photo(client, message):
     if message.reply_to_message and message.reply_to_message.photo:
         photo = message.reply_to_message.photo
