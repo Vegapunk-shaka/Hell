@@ -21,9 +21,9 @@ def _get_image_md5_content(file_path: str) -> tuple[str, bytes]:
 @on_message("ups", allow_stan=True)
 async def enhance_command(client, message):
     if message.reply_to_message and message.reply_to_message.photo:
-        photo = message.reply_to_message.photo[-1]
+        photo = message.reply_to_message.photo
         file_path = f"{photo.file_id}.jpg"
-        await photo.download(file_path)
+        await client.download_media(photo, file_path)
         await message.reply("<b>Enhancing your photo...</b>")
         
         image_md5, content = _get_image_md5_content(file_path)
