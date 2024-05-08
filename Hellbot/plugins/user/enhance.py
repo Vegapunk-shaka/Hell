@@ -1,8 +1,7 @@
 from pyrogram import Client, filters
 from . import HelpMenu, hellbot, on_message
 import os
-from pyrogram.types import Message
-import requests
+import io
 
 api_key = "VqhGPCcCL59BaNicWsgxTXH-kmwuVBMSdz0poqEZZXqgfr5Y"
 
@@ -18,9 +17,11 @@ async def enhance_photo(client, message):
             async with client.http.post(url, files={"file": open(file_path, "rb")}) as response:
                 if response.status_code == 200:
                     enhanced_image = await response.read()
-                    # Convert the enhanced image to a file-like object for sending
-                    enhanced_image_file = io.BytesIO(enhanced_image)
-                    await client.send_photo(message.chat.id, enhanced_image_file, caption="Enhanced image")
+                    if enhanced_image:
+                        enhanced_image_file = io.BytesIO(enhanced_image)
+                        await client.send_photo(message.chat.id, enhanced_image_file, caption="Enhanced image")
+                    else:
+                        await message.reply_text("Failed to get the enhanced image")
                 else:
                     await message.reply_text("Failed to enhance the photo")
         except Exception as e:
