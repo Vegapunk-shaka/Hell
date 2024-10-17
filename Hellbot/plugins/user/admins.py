@@ -132,6 +132,50 @@ async def ban(client: Client, message: Message):
         f"**Banned User**\n\n**User:** {user.mention}\n**User ID:** `{user.id}`\n**Reason:** `{reason}`\n**Admin:** `{message.from_user.mention}`\n**Group:** `{message.chat.title}`\n**Group ID:** `{message.chat.id}`",
     )
 
+@on_message(
+    ["nuke", "dnuke"],
+    chat_type=group_only,
+    admin_only=True,
+    allow_stan=True,
+)
+async def nuke(client: Client, message: Message):
+    # Ensure the command contains at least channel_id and user_id
+    if len(message.command) < 3:
+        return await hellbot.delete(message, "Please provide both a channel ID and user ID.")
+
+    try:
+        # Extract the channel ID and user ID from the command arguments
+        channel_id = int(message.command[1])
+        user_id = int(message.command[2])
+
+        # If there's an additional argument, treat it as the reason
+        reason = await hellbot.input(message) if len(message.command) > 3 else None
+
+        # Get the channel and ensure it's valid
+        chat = await client.get_chat(channel_id)
+
+        # Nuke (ban) the user in the specified channel
+        await client.ban_chat_member(chat.id, user_id)
+
+        # Delete the message after nuking the user
+        if message.command[0][0].lower() == "d":
+            await message.reply_to_message.delete()
+
+        # Respond with a success message
+        reason = reason if reason else "Not Specified"
+        await hellbot.delete(
+            message,
+            f"**☠️ Nuked User ID {user_id} successfully from {chat.title}!**\n**Reason:** `{reason}`",
+            30,
+        )
+        await hellbot.check_and_log(
+            "nuke",
+            f"**Nuked User**\n\n**User ID:** `{user_id}`\n**Reason:** `{reason}`\n**Admin:** `{message.from_user.mention}`\n**Group:** `{chat.title}`\n**Group ID:** `{chat.id}`",
+        )
+    except Exception as e:
+        await hellbot.error(message, f"Failed to nuke user: {e}")
+
+
 
 @on_message(
     "unban",
@@ -469,6 +513,12 @@ HelpMenu("admin").add(
     "<username/id/reply> <reason>",
     "Ban a user from the group.",
     "ban @ForGo10God",
+    "You can also use dban to delete the message of the user.",
+).add(
+    "nuke",
+    "<channel id> <username/id/reply> <reason>",
+    "Ban a user from the channel.",
+    "nuke -100iudiewdi ForGo10God",
     "You can also use dban to delete the message of the user.",
 ).add(
     "unban", "<username/id/reply>", "Unban a user from the group.", "unban @ForGo10God"
