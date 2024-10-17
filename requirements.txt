@@ -16,7 +16,7 @@ motor
 pillow
 psutil
 pyroaddon
-pyrogram
+pyrofork
 pySmartDL
 python-dotenv
 pytz
